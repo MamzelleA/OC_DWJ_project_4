@@ -1,0 +1,14 @@
+/*GENERAL*/
+body {width: 100%; margin: 0;}
+h2 {font: 'Quicksand', sans-serif; font-size: 1.5em;}
+h3 {font-family: 'Special Elite', cursive; color: #007bff;}
+tr, td, th {font-size: 1.2em;}
+a {color: unset;}
+a:hover {text-decoration: unset;}
+ul
+{
+	margin-right: 0;
+	padding-left: 0;
+	list-style-type: none;
+}
+hr {border: solid 0.1em #007bff;}

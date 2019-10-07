@@ -1,0 +1,18 @@
+@media screen and (max-width: 47.9375em) {
+ 	.content-chap{background: none;}
+ 	#nav-title {font-size: 1em;}
+ 	.navbar-toggler 
+ 	{
+ 		border: none; 
+ 		padding: 0;
+ 	}
+ 	.nav-link:hover 
+	{
+		border-top: unset;
+		background-color: #007bff;
+	}
+}
+
+@media screen and (max-width: 36em) {
+ 	.navbar-brand {display: none;}
+}
