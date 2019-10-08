@@ -29,7 +29,7 @@ Class Comments_Manager extends Manager
 		return $result;
 	}
 
-  public function countCo ($chapId) { //chapter
+  public function countCo ($chapId) { //chapter, chaptersList
 		$sql = 'SELECT COUNT(*)
 						FROM comments co
 						INNER JOIN status_comment sco
@@ -77,7 +77,6 @@ Class Comments_Manager extends Manager
 				    AND co.id = sco.id_co
 				    AND co.id_chap = ch.id
 				    ORDER BY co.id DESC';
-		//if(is_array($status)){$status = implode(', ', $status);}
 		$com = $this->execRequest($sql, array($status[0], $status[1], $status[2]));
 		$result = $com->fetchAll(PDO::FETCH_ASSOC);
 		return $result;
@@ -98,7 +97,7 @@ Class Comments_Manager extends Manager
 		$this->execRequest($sql, array($author, $email));
 	}
 
-  public function updateStatusCo ($status, $commentId)	{ //chapter
+  public function updateStatusCo ($status, $commentId)	{ //chapter commentsList
 		$sql = 'UPDATE status_comment
 				SET status_co = ?
 				WHERE id_co = ?';

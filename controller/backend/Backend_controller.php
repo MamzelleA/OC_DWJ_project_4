@@ -48,4 +48,39 @@ class Backend_controller extends Controller
 		return $chapters;
 	}
 
+	public function commentsList () {
+			if(isset($_SESSION['login']) && isset($_SESSION['password'])) {
+				$confirm = NULL;
+				if (!empty($_POST)) {
+					if (isset($_POST['commentId'])) {
+						if (isset($_POST['moderate'])) {
+							$this->comments->updateStatusCo('moderate', $_POST['commentId']);
+							$confirm = 'Le commentaire a bien été modéré.';
+							$comments = $this->comments->getComments(array('published', 'reported', 'moderate'));
+						} elseif (isset($_POST['cancel'])) {
+							$this->comments->updateStatusCo('published', $_POST['commentId']);
+							$confirm = 'Le signalement du commentaire a bien été annulé.';
+							$comments = $this->comments->getComments(array('published', 'reported', 'moderate'));
+						} elseif (isset($_POST['trash'])) {
+							$this->comments->updateStatusCo('trashed' , $_POST['commentId']);
+							$confirm = 'Le commentaire a bien été supprimé.';
+							$comments = $this->comments->getComments(array('published', 'reported', 'moderate'));
+						}
+						$comments = $this->comments->getComments(array('published', 'reported', 'moderate')); // return array published / reported / moderate comments
+					} elseif (isset($_POST['valid'])) {
+						$selection = $_POST['selection'];
+						if ($selection == 'published') {$comments = $this->comments->getComments(array('published', NULL, NULL));}
+						elseif ($selection == 'reported') {$comments = $this->comments->getComments(array('reported', NULL, NULL));}
+						elseif ($selection == 'moderate') {$comments = $this->comments->getComments(array('moderate', NULL, NULL));}
+						elseif ($selection == 'all') {$comments = $this->comments->getComments(array('published', 'reported', 'moderate'));}
+					}
+			} else {$comments = $this->comments->getComments(array('published', 'reported', 'moderate'));} // return array published / reported / moderate comments
+			$view = $this->view->genView(array('comments' => $comments, 'confirm' => $confirm));
+			return $view;
+		} else {
+			header('Location: index.php?action=adminConn');
+			exit;
+		}
+	}
+
 }
