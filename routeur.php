@@ -41,6 +41,8 @@ class Routeur {
 						$this->frontendCtrl->chapter($num, 'published'); // return the chapter asked page
 					} else {throw new Exception('Le paramètre "' .$num. '" renseigné n\'est pas valide');}
 				}
+				elseif ($action == 'about'){$this->frontendCtrl->genericView('about');}
+				elseif ($action == 'legal'){$this->frontendCtrl->genericView('legal');}
 				//ADMIN
 
 			} else	{throw new Exception('Aucune action n\'est définie.');}

@@ -67,4 +67,9 @@ class Frontend_controller extends Controller
 	    throw new Exception('La page demandée n\'existe pas.');
 		}
 	}
+
+	public function genericView ($action) { //legal and about
+		$view = $this->view->genView(array($action));
+		return $view;
+	}
 }
