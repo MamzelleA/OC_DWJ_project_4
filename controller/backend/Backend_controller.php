@@ -83,4 +83,17 @@ class Backend_controller extends Controller
 		}
 	}
 
+	public function trash ($statusCh, $statusCo){
+		if(isset($_SESSION['login']) && isset($_SESSION['password'])) {
+			$confirm = NULL;
+			$chapters = $this->chapters->getChapters(array($statusCh, NULL));
+			$comments = $this->comments->getComments(array($statusCo, NULL, NULL));
+			$view = $this->view->genView(array('chapters' => $chapters, 'comments' => $comments, 'confirm' => $confirm));
+			return $view;
+		} else {
+			header('Location: index.php?action=adminConn');
+			exit;
+		}
+	}
+
 }

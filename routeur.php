@@ -48,6 +48,7 @@ class Routeur {
 				elseif ($action == 'admin'){$this->backendCtrl->admin('published', 'reported');}
 				elseif ($action == 'chaptersList') {$this->backendCtrl->chaptersList();}
 				elseif ($action == 'commentsList'){$this->backendCtrl->commentsList();}
+				elseif ($action == 'trash'){$this->backendCtrl->trash('trashed', 'trashed');}
 			} else	{throw new Exception('Aucune action n\'est définie.');}
 		}
 		catch (Exception $e) { //A REVOIR

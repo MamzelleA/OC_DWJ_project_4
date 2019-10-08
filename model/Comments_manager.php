@@ -99,8 +99,16 @@ Class Comments_Manager extends Manager
 
   public function updateStatusCo ($status, $commentId)	{ //chapter commentsList
 		$sql = 'UPDATE status_comment
-				SET status_co = ?
-				WHERE id_co = ?';
+				    SET status_co = ?
+				    WHERE id_co = ?';
 		$this->execRequest($sql, array($status, $commentId));
+	}
+
+  public function deleteComment ($commentId) { //trash
+		$sql = 'DELETE
+				    FROM comments
+				    WHERE id = ?';
+		$this->execRequest($sql, array($commentId));
+
 	}
 }
