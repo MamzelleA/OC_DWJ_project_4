@@ -25,12 +25,11 @@ class Chapters_manager extends Manager
 		return $result;
   }
 
-	public function getChapters (array $status) { //chapters
-		$sql = 'SELECT ch.id, num_chap, title_chap, content_chap, DATE_FORMAT(create_date, \'%d/%m/%Y\') AS create_date_fr, DATE_FORMAT (modify_date, \'%d/%m/%Y\') AS modify_date_fr
-						FROM chapters ch
-						INNER JOIN status_chapter sch
-						ON ch.id = sch.id_chap
+	public function getChapters (array $status) { //chapters, chaptersList
+		$sql = 'SELECT ch.id, num_chap, title_chap, content_chap, DATE_FORMAT(create_date, \'%d/%m/%Y\') AS create_date_fr, DATE_FORMAT (modify_date, \'%d/%m/%Y\') AS modify_date_fr, sch.id, id_chap, status_chap
+						FROM chapters AS ch, status_chapter AS sch
 						WHERE sch.status_chap IN (?, ?)
+            AND ch.id = sch.id_chap
 						ORDER BY num_chap DESC';
 		$chap = $this->execRequest($sql, array($status[0], $status[1]));
 		$result = $chap->fetchAll(PDO::FETCH_ASSOC);
@@ -49,7 +48,7 @@ class Chapters_manager extends Manager
 		return $result;
 	}
 
-	public function getListNumsCh ($status) { //chapter
+	public function getListNumsCh ($status) { //chapter, chaptersList
 		$sql = 'SELECT ch.id, num_chap, sch.id, id_chap
 				FROM chapters AS ch, status_chapter AS sch
 				WHERE sch.status_chap IN (?, ?)
@@ -70,5 +69,14 @@ class Chapters_manager extends Manager
 		$chap = $this->execRequest($sql);
 		$result = $chap->fetchAll(PDO::FETCH_ASSOC);
 		return $result;
+	}
+
+  //CRUD
+  public function updateStatusCh ($status, $chapterId)
+	{
+		$sql = 'UPDATE status_chapter
+						SET status_chap = ?
+						WHERE id_chap = ?';
+		$stat = $this->execRequest($sql, array($status, $chapterId));
 	}
 }

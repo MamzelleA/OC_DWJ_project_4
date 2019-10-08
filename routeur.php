@@ -46,6 +46,7 @@ class Routeur {
 				elseif ($action == 'adminConn'){$this->frontendCtrl->adminConn();}
 				//ADMIN
 				elseif ($action == 'admin'){$this->backendCtrl->admin('published', 'reported');}
+				elseif ($action == 'chaptersList') {$this->backendCtrl->chaptersList();} 
 			} else	{throw new Exception('Aucune action n\'est définie.');}
 		}
 		catch (Exception $e) { //A REVOIR
