@@ -10,4 +10,10 @@ class Frontend_controller extends Controller
 		$view = $this->view->genView(array('lastCh'=>$lastCh, 'lastCo' =>$lastCo, 'countCh' => $countCh));
 		return $view;
 	}
+
+	public function chapters () {
+		$list = $this->chapters->getChapters(array('published', NULL));
+		$view = $this->view->genView(array('list' => $list));
+		return $view;
+	}
 }

@@ -34,6 +34,7 @@ class Routeur {
 			if (isset($action)) {
 				//USER
 				if($action == 'home') {$this->frontendCtrl->home('published', 'published');}
+				elseif ($action == 'chapters') {$this->frontendCtrl->chapters();}
 				//ADMIN
 
 			} else	{throw new Exception('Aucune action n\'est définie.');}
