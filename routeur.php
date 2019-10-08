@@ -1,5 +1,4 @@
 <?php
-namespace OC_project_4;
 session_start();
 require_once ('controller/frontend/Frontend_controller.php');
 require_once ('controller/backend/Backend_controller.php');
@@ -34,7 +33,7 @@ class Routeur {
 			$action = $this->getParameter($_GET, 'action');
 			if (isset($action)) {
 				//USER
-
+				if($action == 'home') {$this->frontendCtrl->home('published', 'published');}
 				//ADMIN
 
 			} else	{throw new Exception('Aucune action n\'est définie.');}
