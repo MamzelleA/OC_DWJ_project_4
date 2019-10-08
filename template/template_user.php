@@ -11,7 +11,7 @@ ob_start();
 		    			<img class="img-fluid" id="logo-avion" src="public/images/logo_brand.png" alt="logo avion papier">
 		  			</a>
 	  			</div>
-				<div class="navbar-text" id="nav-title">
+				<div class="navbar-text">
 					<h1 class="py-0 my-0 ml-sm-0 ml-1 text-white" id="nav-title">BILLET SIMPLE POUR L'ALASKA</h1>
 					<h2 class="py-0 my-0 ml-sm-0 ml-1 text-white"><span class="logo logo-small">Jean Forteroche</span></h2>
 				</div>

@@ -1,8 +1,12 @@
 <?php $this->title = 'L\'auteur'; ?>
 <div class="row">
-	<div class="col-sm-9 px-3 modify">
+	<div class="col-md-12 mb-3">
 		<h2 id="title" class="text-center h2-title-top" ><span class="font-weight-bold">A PROPOS DE </span><?php echo mb_strtoupper($this->title); ?></h2>
-		<div class="content-static">
+	</div>
+	<div class="col-md-9 px-3">
+		<p class="author-word text-left mb-0">"Je souhaitais partager avec vous la création d'un roman : les doutes, détours et retours que traversent un auteur. Je souhaitais aussi partager avec vous ce voyage unique et tellement intense en Alaska que j'ai effectué l'année dernière. Je souhaitais, enfin, me mesurer à ce monde que représente internet aujourd'hui. En espérant que vous prendrez plaisir à découvrir mes mots. Avec toute mon affection." </p>
+		<p class="author-word text-right my-0">JForteroche</p>
+		<hr class="small-hr">
 		<h3 id="title-1">Présentation de l'<span class="font-weight-bold">auteur</span></h3>
 		<p class="text-justify">Jean Forteroche est né en 1961 à Barne sur Loire dans le Berry où il a grandi. Il est parti faire des études de lettres classiques à la Sorbonne. Après quelques années consacrées à l'enseignement universitaire, il a décidé de se consacrer entièrement à l'écriture et à découvrir le monde à travers de nombreux voyages. Féru de nouvelles technologies, il a décidé de publié au fur et à mesure de sa création son nouveau roman.</p>
 		<h3 id="title-2">Le sentiment infini de l'<span class="font-weight-bold">écriture</span></h3>
@@ -21,7 +25,6 @@
 			<li>Simplissime / nouvelle <br><small>2008 - Edition Macaron</small></li>
 			<li>Mission Sénégal / fiction <br><small>2014 - Edition Gallimard</small></li>
 		</ul>
-		</div>
 		<h3>Réseaux <span class="font-weight-bold">sociaux</span></h3>
 		<ul class="list-inline">
 			<li class="list-inline-item"><a href="https://twitter.com" title="twitter"><i class="fab fa-twitter-square fab-about"></i></a></li>

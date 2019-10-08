@@ -1,7 +1,11 @@
 /*GENERAL*/
 body {width: 100%; margin: 0;}
-h2 {font: 'Quicksand', sans-serif; font-size: 1.5em;}
-h3 {font-family: 'Special Elite', cursive; color: #007bff;}
+h2 {font-family: 'Quicksand', sans-serif; font-size: 1.5em;}
+h3 {font-family: 'Special Elite', cursive; color: #007bff; font-size: 1.5em}
+h4 {font-family: 'Quicksand', sans-serif;}
+p, a, li, .alert {font-family: 'QuickSand', sans-serif; font-size: 1em;}
+.small-h4 {font-size: 0.5em;}
+.small-fa {font-size: 0.8em;}
 tr, td, th {font-size: 1.2em;}
 a {color: unset;}
 a:hover {text-decoration: unset;}
@@ -12,3 +16,64 @@ ul
 	list-style-type: none;
 }
 hr {border: solid 0.1em #007bff;}
+.small-hr {border: 0.05em solid rgba(0, 0, 0, 0.125)}
+.col {padding: 0;}
+.row{ margin: 0.8em 0 0.5em 0;}
+.no-border-btn {border: none;}
+.fa-times, .fa-paper-plane, .fab-about, .fa-book-reader, .fa-edit, .fa-bookmark, .fa-plus-circle, .fa-exclamation-circle, .fa-question-circle {color: #007bff;}
+.fas, .far, .fab, .fa {font-size: 1.5em;}
+
+/*SCROLLUP WINDOW*/
+.scrollup {
+	position: fixed;
+	bottom: 0.8em;
+	right: 0.5em;
+	display: none;
+	color: #007bff;
+	border-radius: 50%;
+	padding: 0 0.5em 0 0.5em;
+	font-size: 1.5em;
+	text-align: center;
+}
+
+.scrollup:hover {
+	color: white;
+	background-color: #007bff;
+}
+
+/*NAVBAR AND FOOTER*/
+.navbar, .page-footer {background-color: #000066;}
+.navbar {border-bottom: solid 0.1em #007bff;}
+.fa-bars {color: white;}
+.page-footer  {border-top: solid 0.1em #007bff;}
+.img-top {margin-bottom: 0.5em;}
+.card-img-overlay {background-color: rgb(255,255,255,0.5);}
+.visible-link {color: #007bff;}
+.navbar-nav { color: #007bff;}
+.active {font-weight: bold;}
+.logo {font-family: 'Over the Rainbow', cursive;}
+.nav-link:hover {border-top: solid 0.1em #007bff; padding-top: 0.5em;}
+#nav-title {font-family: 'Special Elite', cursive; font-size: 1.5em;}
+#logo-avion {width: 6em; height: auto;}
+.link-footer {font-size: 1.5em;}
+.social {font-size: 2.2em;}
+.home-h3 {font-family: 'QuickSand', sans-serif;}
+
+/*PAGES*/
+/*chapter view*/
+#lettrine
+{
+    font-size : 4em;
+    font-family : 'Over the Rainbow', cursive;
+    font-weight : bold;
+    text-indent: 0;
+    line-height: 1em;
+    padding-right: 0.2em;
+    float : left;
+}
+
+/*about view*/
+.author-word {font-family: 'Over the Rainbow', cursive; font-size: 1.2em}
+
+/*admin view*/
+#reader-white, #edit-white {color: white;}
