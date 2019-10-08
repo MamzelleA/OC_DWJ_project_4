@@ -4,12 +4,48 @@ require_once('controller/Controller.php');
 class Backend_controller extends Controller
 {
 
-	public function admin ($statCo, $lastCo) //use in action admin
-	{
+	public function admin ($statCo, $lastCo) {
 			$lastCh = $this->chapters->getLastSixCh();
 			$reported = $this->comments->getComments(array($statCo, NULL, NULL));
 			$lastCo = $this->comments->lastThreeCo(array($lastCo, NULL));
 			$view = $this->view->genView(array('lastCh'=> $lastCh, 'reported'=> $reported, 'lastCo' => $lastCo));
 			return $view;
 	}
+
+	public function chaptersList() {
+		if(isset($_SESSION['login']) && isset($_SESSION['password'])) {
+			$confirm = NULL;
+			$chapters = $this->chaptersAndCount('published', 'draft');
+			$nums = $this->chapters->getListNumsCh(array('published', 'draft'));
+			for($i=0; $i<count($nums); $i++) {
+				$listNums[] = $nums[$i]['num_chap'];
+			}
+			$arrayDuplicate = array_count_values($listNums);
+			if (isset($_POST['trash'])) {
+				$this->chapters->updateStatusCh('trashed', $_POST['chapterId']);
+				$confirm = 'Le chapitre et les commentaires associés ont bien été placés dans la corbeille.';
+				$chapters = $this->chaptersAndCount('published', 'draft');
+			} elseif (isset($_POST['valid'])) {
+				$select = $_POST['select'];
+				if ($select == 'published') {$chapters = $this->chaptersAndCount('published', NULL);}
+				elseif ($select == 'draft') {$chapters = $this->chaptersAndCount('draft', NULL);}
+				elseif ($select == 'all') {$chapters = $this->chaptersAndCount('published', 'draft');}
+			}
+			$view = $this->view->genView(array('chapters' => $chapters, 'arrayDuplicate' => $arrayDuplicate, 'confirm' => $confirm));
+			return $view;
+		} else {
+			header('Location: index.php?action=adminConn');
+			exit;
+		}
+	}
+
+	private function chaptersAndCount(...$status) { //use in chaptersList()
+		$chapters = $this->chapters->getChapters($status);
+		for($i = 0; $i<count($chapters); $i++) {
+			$chapId = $chapters[$i]['id'];
+			$chapters[$i]['countCom'] = $this->comments->countCo($chapId);
+		}
+		return $chapters;
+	}
+
 }
