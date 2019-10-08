@@ -38,7 +38,7 @@ class Routeur {
 				elseif ($action == 'chapter'){
 					$num = $this->getParameter($_GET, 'num');
 					if(!empty($num) && is_numeric($num)) {
-						$this->frontendCtrl->chapter($num, 'published'); // return the chapter asked page
+						$this->frontendCtrl->chapter($num, 'published');
 					} else {throw new Exception('Le paramètre "' .$num. '" renseigné n\'est pas valide');}
 				}
 				elseif ($action == 'about'){$this->frontendCtrl->genericView('about');}
@@ -49,6 +49,12 @@ class Routeur {
 				elseif ($action == 'chaptersList') {$this->backendCtrl->chaptersList();}
 				elseif ($action == 'commentsList'){$this->backendCtrl->commentsList();}
 				elseif ($action == 'trash'){$this->backendCtrl->trash('trashed', 'trashed');}
+				elseif ($action == 'see'){
+					$id = $this->getParameter($_GET, 'id');
+					if(!empty($id) && is_numeric($id)) {
+						$this->backendCtrl->see($id);
+					} else {throw new Exception('Le paramètre "' .$id. '" renseigné n\'est pas valide');}
+				}
 			} else	{throw new Exception('Aucune action n\'est définie.');}
 		}
 		catch (Exception $e) { //A REVOIR

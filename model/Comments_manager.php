@@ -17,7 +17,7 @@ Class Comments_Manager extends Manager
 		return $result;
 	}
 
-  public function getLinkCo ($chapterId) { //chapter
+  public function getLinkCo ($chapterId) { //chapter, see
     $sql = 'SELECT co.id, author, content_co, id_chap, DATE_FORMAT(add_date, \'%d/%m/%Y\') AS add_date_fr, id_co, status_co
 				    FROM comments AS co, status_comment AS sco
 				    WHERE NOT sco.status_co = \'trashed\'
@@ -29,7 +29,7 @@ Class Comments_Manager extends Manager
 		return $result;
 	}
 
-  public function countCo ($chapId) { //chapter, chaptersList
+  public function countCo ($chapId) { //chapter, chaptersList, see
 		$sql = 'SELECT COUNT(*)
 						FROM comments co
 						INNER JOIN status_comment sco
