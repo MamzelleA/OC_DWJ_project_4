@@ -35,6 +35,12 @@ class Routeur {
 				//USER
 				if($action == 'home') {$this->frontendCtrl->home('published', 'published');}
 				elseif ($action == 'chapters') {$this->frontendCtrl->chapters();}
+				elseif ($action == 'chapter'){
+					$num = $this->getParameter($_GET, 'num');
+					if(!empty($num) && is_numeric($num)) {
+						$this->frontendCtrl->chapter($num, 'published'); // return the chapter asked page
+					} else {throw new Exception('Le paramètre "' .$num. '" renseigné n\'est pas valide');}
+				}
 				//ADMIN
 
 			} else	{throw new Exception('Aucune action n\'est définie.');}
