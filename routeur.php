@@ -33,7 +33,7 @@ class Routeur {
 			$action = $this->getParameter($_GET, 'action');
 			if (isset($action)) {
 				//USER
-				if($action == 'home') {$this->frontendCtrl->home('published', 'published');}
+				if($action == 'home') {$this->frontendCtrl->home(array('published', 'reported') 'published');}
 				elseif ($action == 'chapters') {$this->frontendCtrl->chapters();}
 				elseif ($action == 'chapter'){
 					$num = $this->getParameter($_GET, 'num');

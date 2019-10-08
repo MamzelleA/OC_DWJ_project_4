@@ -3,7 +3,7 @@ require_once('controller/Controller.php');
 
 class Frontend_controller extends Controller
 {
-	public function home ($statusCo, $statusCh) {
+	public function home (array $statusCo, $statusCh) {
 		$lastCh = $this->chapters->getLastThreeCh();
 		$lastCo = $this->comments->lastThreeCo($statusCo);
 		$countCh = $this->chapters->countStatusCh($statusCh);
