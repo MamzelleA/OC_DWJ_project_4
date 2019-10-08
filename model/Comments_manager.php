@@ -70,6 +70,19 @@ Class Comments_Manager extends Manager
 		return $result;
 	}
 
+  public function getComments (array $status) { //admin
+    $sql = 'SELECT co.id, id_chap, author, content_co, DATE_FORMAT(add_date, \'%d/%m/%Y\') AS add_date_fr, ch.id, num_chap, title_chap, id_co, status_co
+				    FROM comments AS co, chapters AS ch, status_comment AS sco
+				    WHERE sco.status_co IN (?, ?, ?)
+				    AND co.id = sco.id_co
+				    AND co.id_chap = ch.id
+				    ORDER BY co.id DESC';
+		//if(is_array($status)){$status = implode(', ', $status);}
+		$com = $this->execRequest($sql, array($status[0], $status[1], $status[2]));
+		$result = $com->fetchAll(PDO::FETCH_ASSOC);
+		return $result;
+  }
+
   //CRUD
   public function addCo ($author, $content, $chapterId) { //chapter
 		$sqlCom = 'INSERT INTO comments(author, content_co, id_chap, add_Date) VALUES (?, ?, ?, NOW())';
