@@ -85,8 +85,8 @@ class Frontend_controller extends Controller
 					$log = $this->admin->getLog($_POST['login'], $_POST['password']);
 					var_dump($log);
 					if(!empty($log)) {
-						$_SESSION['login'] = $log['login'];
-						$_SESSION['password'] = $log['password'];
+						$_SESSION['login'] = $log[0]['login'];
+						$_SESSION['password'] = $log[0]['password'];
 						header('Location: index.php?action=admin');
 						exit;
 					} else {$confirm = 'L\'identifiant et/ou le mot de passe renseigné est invalide.';}
