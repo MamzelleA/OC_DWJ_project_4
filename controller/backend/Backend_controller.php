@@ -99,27 +99,30 @@ class Backend_controller extends Controller
 	public function see ($chapId) {
 		if(isset($_SESSION['login']) && isset($_SESSION['password'])) {
 			$confirm = NULL;
-			$chapter = $this->chapters->getChapterById($chapId);
-			$comments = $this->comments->getLinkCo($chapId);
-			$count = $this->comments->countCo($chapId);
-			if(isset($_POST['moderate'])) {
-				$this->comments->updateStatusCo('moderate', $_POST['commentId']);
-				$confirm = 'Le commentaire a bien été modéré.';
+			$numsList = $this->listNumsCh(array('published', 'draft')); //return array with number of all published and draft chapters
+		  if(in_array($num, $numsList)) {
 				$chapter = $this->chapters->getChapterById($chapId);
 				$comments = $this->comments->getLinkCo($chapId);
-			} elseif(isset($_POST['cancel'])) {
-				$this->comments->updateStatusCo('published', $_POST['commentId']);
-				$confirm = 'Le statut du commentaire a bien été modifié.';
-				$chapter = $this->chapters->getChapterById($chapId);
-				$comments = $this->comments->getLinkCo($chapId);
-			} elseif(isset($_POST['trash'])) {
-				$this->comments->updateStatusCo('trashed', $_POST['commentId']);
-				$confirm = 'Le commentaire a bien été envoyé vers la corbeille.';
-				$chapter = $this->chapters->getChapterById($chapId);
-				$comments = $this->comments->getLinkCo($chapId);
-			}
-			$view = $this->view->genView(array('chapter'=>$chapter,'comments'=>$comments, 'count'=>$count, 'confirm' => $confirm));
-			return $view;
+				$count = $this->comments->countCo($chapId);
+				if(isset($_POST['moderate'])) {
+					$this->comments->updateStatusCo('moderate', $_POST['commentId']);
+					$confirm = 'Le commentaire a bien été modéré.';
+					$chapter = $this->chapters->getChapterById($chapId);
+					$comments = $this->comments->getLinkCo($chapId);
+				} elseif(isset($_POST['cancel'])) {
+					$this->comments->updateStatusCo('published', $_POST['commentId']);
+					$confirm = 'Le statut du commentaire a bien été modifié.';
+					$chapter = $this->chapters->getChapterById($chapId);
+					$comments = $this->comments->getLinkCo($chapId);
+				} elseif(isset($_POST['trash'])) {
+					$this->comments->updateStatusCo('trashed', $_POST['commentId']);
+					$confirm = 'Le commentaire a bien été envoyé vers la corbeille.';
+					$chapter = $this->chapters->getChapterById($chapId);
+					$comments = $this->comments->getLinkCo($chapId);
+				}
+				$view = $this->view->genView(array('chapter'=>$chapter,'comments'=>$comments, 'count'=>$count, 'confirm' => $confirm));
+				return $view;
+			} else {throw new Exception('La page demandée n\'existe pas.');}
 		} else {
 			header('Location: index.php?action=adminConn');
 			exit;
