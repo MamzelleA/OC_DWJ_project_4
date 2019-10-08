@@ -16,10 +16,7 @@ class Backend_controller extends Controller
 		if(isset($_SESSION['login']) && isset($_SESSION['password'])) {
 			$confirm = NULL;
 			$chapters = $this->chaptersAndCount('published', 'draft');
-			$nums = $this->chapters->getListNumsCh(array('published', 'draft'));
-			for($i=0; $i<count($nums); $i++) {
-				$listNums[] = $nums[$i]['num_chap'];
-			}
+			$listNums = $this->listNumsCh(array('published', 'draft'));
 			$arrayDuplicate = array_count_values($listNums);
 			if (isset($_POST['trash'])) {
 				$this->chapters->updateStatusCh('trashed', $_POST['chapterId']);
@@ -99,8 +96,9 @@ class Backend_controller extends Controller
 	public function see ($chapId) {
 		if(isset($_SESSION['login']) && isset($_SESSION['password'])) {
 			$confirm = NULL;
-			$numsList = $this->listNumsCh(array('published', 'draft')); //return array with number of all published and draft chapters
-		  if(in_array($num, $numsList)) {
+			$idsList = $this->chapters->getListIdsCh(array('published', 'draft')); //return array with number of all published and draft chapters
+var_dump($idsList);
+			if(in_array($chapId, $idsList)) {
 				$chapter = $this->chapters->getChapterById($chapId);
 				$comments = $this->comments->getLinkCo($chapId);
 				$count = $this->comments->countCo($chapId);
@@ -127,6 +125,69 @@ class Backend_controller extends Controller
 			header('Location: index.php?action=adminConn');
 			exit;
 		}
+	}
+
+	public function modify ($chapId) {
+		if(isset($_SESSION['login']) && isset($_SESSION['password'])) {
+			$idsList = $this->listIdsCh(array('published', 'draft')); //return array with number of all published and draft chapters
+		  if(in_array($chapId, $idsList)) {
+				$lastNum = NULL;
+			  $confirm = NULL;
+			  $trouble = NULL;
+				$chapter = $this->chapters->getChapterById($chapId);
+				if(isset($_POST['num']) && $_POST['num'] != ''){$_SESSION['num'] = $_POST['num'];}
+			  if(isset($_POST['title']) && $_POST['title'] != ''){$_SESSION['title'] = $_POST['title'];}
+			  if(isset($_POST['content']) && $_POST['content'] != ''){$_SESSION['content'] = $_POST['content'];}
+				if(isset($_POST['published'])) {
+					if($chapter['status_chap'] == 'published') {
+						if(!empty($_POST['title']) && !empty($_POST['content'])){
+							$this->chapters->updatePublished($_POST['title'], $_POST['content'], $chapId);
+						} else {
+				      $trouble = 'Tous les champs doivent être renseignés.';
+				    }
+					} elseif ($chapter['status_chap'] == 'draft') {
+						if(!empty($_POST['num']) && !empty($_POST['title']) && !empty($_POST['content'])) {
+								$lastNum = $this->chapters->lastNum('published');//return the number (str) of the last published chapter in a bi-dimension array
+								$next = intval($lastNum[0]['num_chap']) + 1;
+							if($_POST['num'] == $next) {
+						 		$this->chapters->updatePublished ($_POST['title'], $_POST['content'], $chapId);
+							 	$this->chapters->updateStatusCh('published', $chapId);
+							 	$confirm = 'Votre chapitre a bien été modifié et publié';
+							} else {
+							 	$trouble = 'ATTENTION ! Les modifications n\'ont pas pu être prises en compte et publiées car : le numéro du chapitre n\'est pas cohérent, il devrait être égal à ' .$next.  '.';
+							}
+						} else {
+					   $trouble = 'Tous les champs doivent être renseignés.';
+					  }
+					}
+				} elseif(isset($_POST['draft'])) {
+					$numChaps = $this->listNumsCh(array('published', 'draft')); //return bi-dimension array with all the chap numbers not trashed
+					if(in_array($_POST['num'], $numChaps)) {
+						$confirm = 'Le chapitre a bien été enregistré en brouillon.<br>ATTENTION ! Le numéro de chapitre <span class="font-bold">' .$_POST['numChap']. '</span> existe déjà.';
+					} else {
+						$confirm = 'Le chapitre a bien été enregistré en brouillon.';
+					}
+					$this->chapters->updateDraft ($_POST['num'], $_POST['title'], $_POST['content'], $chapId);
+				} elseif (isset($_POST['trash'])) {
+					$this->chapters->updateStatusCh('trashed', $chapId);
+					$confirm = 'Le chapitre a bien été placé dans la corbeille.';
+				}
+				$view = $this->view->genView(array('chapter' => $chapter, 'lastNum' => $lastNum, 'confirm' => $confirm, 'trouble' => $trouble));
+				unset ($_SESSION['num'], $_SESSION['title'], $_SESSION['content']);
+				return $view;
+			} else {throw new Exception('Le chapitre demandé n\'existe pas.');}
+		} else {
+			header('Location: index.php?action=adminConn');
+			exit;
+		}
+	}
+
+	private function listIdsCh ($status) {
+		$list = $this->chapters->getListIdsCh($status); //return array with number of all chapters according to status
+	  for($i = 0; $i<count($list); $i++) {
+	    $idsList[] = $list[$i]['id'];
+	  }
+		return $idsList;
 	}
 
 }

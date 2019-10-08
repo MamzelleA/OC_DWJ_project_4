@@ -55,6 +55,12 @@ class Routeur {
 						$this->backendCtrl->see($id);
 					} else {throw new Exception('Le paramètre "' .$id. '" renseigné n\'est pas valide');}
 				}
+				elseif ($action = 'modify'){
+					$id = $this->getParameter($_GET, 'id');
+					if(!empty($id) && is_numeric($id)) {
+						$this->backendCtrl->modify($id);
+					} else {throw new Exception('Le paramètre"' .$id. '"renseigné n\'est pas valide');}
+				}
 			} else	{throw new Exception('Aucune action n\'est définie.');}
 		}
 		catch (Exception $e) { //A REVOIR
