@@ -7,8 +7,8 @@ class Backend_controller extends Controller
 	public function admin ($statCo, $lastCo) {
 		if(isset($_SESSION['login']) && isset($_SESSION['password'])) {
 			$lastCh = $this->chapters->getLastSixCh();
-			$reported = $this->comments->getComments(array($statCo, NULL, NULL));
-			$lastCo = $this->comments->lastThreeCo(array($lastCo, NULL));
+			$reported = $this->comments->getCommentsByStatus($statCo);
+			$lastCo = $this->comments->lastThreePublishedCo($lastCo);
 			$view = $this->view->genView(array('lastCh'=> $lastCh, 'reported'=> $reported, 'lastCo' => $lastCo));
 			return $view;
 		} else {
@@ -58,25 +58,25 @@ class Backend_controller extends Controller
 						if (isset($_POST['moderate'])) {
 							$this->comments->updateStatusCo('moderate', $_POST['commentId']);
 							$confirm = 'Le commentaire a bien été modéré.';
-							$comments = $this->comments->getComments(array('published', 'reported', 'moderate'));
+							$comments = $this->comments->getCommentsNoTrash(); // return array published / reported / moderate comments
 						} elseif (isset($_POST['cancel'])) {
 							$this->comments->updateStatusCo('published', $_POST['commentId']);
 							$confirm = 'Le signalement du commentaire a bien été annulé.';
-							$comments = $this->comments->getComments(array('published', 'reported', 'moderate'));
+							$comments = $this->comments->getCommentsNoTrash();
 						} elseif (isset($_POST['trash'])) {
 							$this->comments->updateStatusCo('trashed' , $_POST['commentId']);
 							$confirm = 'Le commentaire a bien été supprimé.';
-							$comments = $this->comments->getComments(array('published', 'reported', 'moderate'));
+							$comments = $this->comments->getCommentsNoTrash();
 						}
-						$comments = $this->comments->getComments(array('published', 'reported', 'moderate')); // return array published / reported / moderate comments
+						$comments = $this->comments->getCommentsNoTrash();
 					} elseif (isset($_POST['valid'])) {
 						$selection = $_POST['selection'];
-						if ($selection == 'published') {$comments = $this->comments->getComments(array('published', NULL, NULL));}
-						elseif ($selection == 'reported') {$comments = $this->comments->getComments(array('reported', NULL, NULL));}
-						elseif ($selection == 'moderate') {$comments = $this->comments->getComments(array('moderate', NULL, NULL));}
-						elseif ($selection == 'all') {$comments = $this->comments->getComments(array('published', 'reported', 'moderate'));}
+						if ($selection == 'published') {$comments = $this->comments->getCommentsByStatus('published');}
+						elseif ($selection == 'reported') {$comments = $this->comments->getCommentsByStatus('reported');}
+						elseif ($selection == 'moderate') {$comments = $this->comments->getCommentsByStatus('moderate');}
+						elseif ($selection == 'all') {$comments = $this->comments->getCommentsNoTrash();}
 					}
-			} else {$comments = $this->comments->getComments(array('published', 'reported', 'moderate'));} // return array published / reported / moderate comments
+			} else {$comments = $this->comments->getCommentsNoTrash();}
 			$view = $this->view->genView(array('comments' => $comments, 'confirm' => $confirm));
 			return $view;
 		} else {
@@ -89,7 +89,7 @@ class Backend_controller extends Controller
 		if(isset($_SESSION['login']) && isset($_SESSION['password'])) {
 			$confirm = NULL;
 			$chapters = $this->chapters->getChapters(array($statusCh, NULL));
-			$comments = $this->comments->getComments(array($statusCo, NULL, NULL));
+			$comments = $this->comments->getCommentsByStatus($statusCo);
 			$view = $this->view->genView(array('chapters' => $chapters, 'comments' => $comments, 'confirm' => $confirm));
 			return $view;
 		} else {

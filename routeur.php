@@ -33,7 +33,7 @@ class Routeur {
 			$action = $this->getParameter($_GET, 'action');
 			if (isset($action)) {
 				//USER
-				if($action == 'home') {$this->frontendCtrl->home(array('published', 'reported'), 'published');}
+				if($action == 'home') {$this->frontendCtrl->home('published', 'published');}
 				elseif ($action == 'chapters') {$this->frontendCtrl->chapters();}
 				elseif ($action == 'chapter'){
 					$num = $this->getParameter($_GET, 'num');
@@ -45,7 +45,7 @@ class Routeur {
 				elseif ($action == 'legal'){$this->frontendCtrl->genericView('legal');}
 				elseif ($action == 'adminConn'){$this->frontendCtrl->adminConn();}
 				//ADMIN
-				elseif ($action == 'admin'){$this->backendCtrl->admin('published', 'reported');}
+				elseif ($action == 'admin'){$this->backendCtrl->admin('reported', 'published');}
 				elseif ($action == 'chaptersList') {$this->backendCtrl->chaptersList();}
 				elseif ($action == 'commentsList'){$this->backendCtrl->commentsList();}
 				elseif ($action == 'trash'){$this->backendCtrl->trash('trashed', 'trashed');}

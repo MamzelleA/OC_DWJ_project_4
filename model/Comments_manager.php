@@ -3,16 +3,16 @@ require_once('Manager.php');
 
 Class Comments_Manager extends Manager
 {
-  public function lastThreeCo (array $status) //home and admin
+  public function lastThreePublishedCo ($status) //home and admin
 	{
     $sql = 'SELECT co.id, id_chap, author, content_co, DATE_FORMAT(add_date, \'%d/%m/%Y\') AS add_date_fr, ch.id, num_chap, title_chap, id_co, status_co
 				    FROM comments AS co, chapters AS ch, status_comment AS sco
-				    WHERE sco.status_co IN (?, ?)
+				    WHERE sco.status_co = ?
             AND co.id_chap = ch.id
 				    AND co.id = sco.id_co
 				    ORDER BY co.id DESC
 				    LIMIT 3';
-		$com = $this->execRequest($sql, array($status[0], $status[1]));
+		$com = $this->execRequest($sql, array($status));
 		$result = $com->fetchAll(PDO::FETCH_ASSOC);
 		return $result;
 	}
@@ -70,16 +70,28 @@ Class Comments_Manager extends Manager
 		return $result;
 	}
 
-  public function getComments (array $status) { //admin
+  public function getCommentsNoTrash () { //commentsList
     $sql = 'SELECT co.id, id_chap, author, content_co, DATE_FORMAT(add_date, \'%d/%m/%Y\') AS add_date_fr, ch.id, num_chap, title_chap, id_co, status_co
 				    FROM comments AS co, chapters AS ch, status_comment AS sco
-				    WHERE sco.status_co IN (?, ?, ?)
+				    WHERE NOT sco.status_co = \'trashed\'
 				    AND co.id = sco.id_co
 				    AND co.id_chap = ch.id
 				    ORDER BY co.id DESC';
-		$com = $this->execRequest($sql, array($status[0], $status[1], $status[2]));
+		$com = $this->execRequest($sql);
 		$result = $com->fetchAll(PDO::FETCH_ASSOC);
 		return $result;
+  }
+
+  public function getCommentsByStatus ($status) { //admin, trash
+    $sql = 'SELECT co.id, id_chap, author, content_co, DATE_FORMAT(add_date, \'%d/%m/%Y\') AS add_date_fr, ch.id, num_chap, title_chap, id_co, status_co
+            FROM comments AS co, chapters AS ch, status_comment AS sco
+            WHERE sco.status_co = ?
+            AND co.id = sco.id_co
+            AND co.id_chap = ch.id
+            ORDER BY co.id DESC';
+    $com = $this->execRequest($sql, array($status));
+    $result = $com->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
   }
 
   //CRUD

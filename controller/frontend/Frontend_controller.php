@@ -3,9 +3,9 @@ require_once('controller/Controller.php');
 
 class Frontend_controller extends Controller
 {
-	public function home (array $statusCo, $statusCh) {
+	public function home ($statusCo, $statusCh) {
 		$lastCh = $this->chapters->getLastThreeCh();
-		$lastCo = $this->comments->lastThreeCo($statusCo);
+		$lastCo = $this->comments->lastThreePublishedCo($statusCo);
 		$countCh = $this->chapters->countStatusCh($statusCh);
 		$view = $this->view->genView(array('lastCh'=>$lastCh, 'lastCo' =>$lastCo, 'countCh' => $countCh));
 		return $view;
@@ -21,7 +21,7 @@ class Frontend_controller extends Controller
 		$pConfirm = NULL;
 		$rConfirm = NULL;
 		$numsList = $this->listNumsCh(array('published', NULL)); //return array with number of all published chapters numbers
-	  if(in_array($num, $numsList)) {
+		if(in_array($num, $numsList)) {
 	    $chap = $this->chapters->getChapterByNum($num, $status);
 	    $chapId = $chap['id'];
 	    $com = $this->comments->getLinkCo($chapId);
@@ -63,9 +63,7 @@ class Frontend_controller extends Controller
 			}
 			$view = $this->view->genView(array('chapter'=> $chap,'comment'=> $com, 'countCom'=> $countCom, 'countChap' => $countChap,  'pConfirm' => $pConfirm, 'rConfirm' => $rConfirm));
 	    return $view;
-	  } else {
-	    throw new Exception('La page demandée n\'existe pas.');
-		}
+	  } else {throw new Exception('La page demandée n\'existe pas.');}
 	}
 
 	public function genericView ($action) { //legal and about

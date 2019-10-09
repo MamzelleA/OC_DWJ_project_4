@@ -7,7 +7,7 @@ $this->title = 'Administration';
 	</div>
 </div><!-- //ROW title-->
 <div class="row">
-	<div class="card-group col-md-12 mb-5">
+	<div class="card-group col-md-12 my-5">
 	<?php
 	foreach ($lastCh as $chap):
 	?>
@@ -30,11 +30,11 @@ $this->title = 'Administration';
 <div class="row">
 	<div class="col-sm-12">
 		<hr>
-		<h2 class="text-center"><a href="index.php?action=commentsList#reported-comments">COMMENTAIRES <b>SIGNALES</b></a></h2>
+		<h2 class="text-center"><a href="index.php?action=commentsList">COMMENTAIRES <b>SIGNALES</b></a></h2>
 		<?php
 		if (count($reported) == 0)
 		{
-			print '<p class="content-com">Il n\'y a actuellement aucun commentaire signalé.</p>';
+			print '<p class="content-com">Il n\'y a actuellement aucun commentaire signalé.</p><hr class="small-hr">';
 
 		} else {
 			foreach ($reported as $rcom):
@@ -52,7 +52,7 @@ $this->title = 'Administration';
 </div><!-- //ROW reported co-->
 <div class="row">
 	<div class="col mx-3">
-		<h2 class="text-center"><a href="index.php?action=commentsList#published-comments">DERNIERS COMMENTAIRES <b>PUBLIES</b></a></h2>
+		<h2 class="text-center"><a href="index.php?action=commentsList">DERNIERS COMMENTAIRES <b>PUBLIES</b></a></h2>
 		<?php
 		foreach ($lastCo as $pcom):
 		?>
