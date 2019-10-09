@@ -142,6 +142,7 @@ var_dump($idsList);
 					if($chapter['status_chap'] == 'published') {
 						if(!empty($_POST['title']) && !empty($_POST['content'])){
 							$this->chapters->updatePublished($_POST['title'], $_POST['content'], $chapId);
+							$confirm = 'Votre chapitre a bien été modifié.';
 						} else {
 				      $trouble = 'Tous les champs doivent être renseignés.';
 				    }
@@ -182,7 +183,7 @@ var_dump($idsList);
 		}
 	}
 
-	private function listIdsCh ($status) {
+	private function listIdsCh ($status) { //use in modify()
 		$list = $this->chapters->getListIdsCh($status); //return array with number of all chapters according to status
 	  for($i = 0; $i<count($list); $i++) {
 	    $idsList[] = $list[$i]['id'];

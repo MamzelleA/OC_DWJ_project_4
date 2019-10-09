@@ -9,7 +9,7 @@ if (isset($chapter['num_chap'])) {
 	<div class="col-12" id="confirm-message">
 		<h2 class="text-center">MODIFIER UN <b>CHAPITRE</b></h2>
 		<?php
-		if (isset($confirm)){
+		if (!empty($confirm)){
 			echo '<div class="alert alert-primary alert-dismissible fade show m-3" role="alert">' .$confirm. '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
 		?>
 		<div class="col-sm-10 offset-1">
@@ -18,7 +18,7 @@ if (isset($chapter['num_chap'])) {
 		</div>
 		<?php
 		} else {
-			if (isset($trouble)){
+			if (!empty($trouble)){
 				echo '<div class="alert alert-primary alert-dismissible fade show m-3" role="alert">' .$trouble. '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
 			}
 		?>
