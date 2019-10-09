@@ -5,11 +5,16 @@ class Backend_controller extends Controller
 {
 
 	public function admin ($statCo, $lastCo) {
+		if(isset($_SESSION['login']) && isset($_SESSION['password'])) {
 			$lastCh = $this->chapters->getLastSixCh();
 			$reported = $this->comments->getComments(array($statCo, NULL, NULL));
 			$lastCo = $this->comments->lastThreeCo(array($lastCo, NULL));
 			$view = $this->view->genView(array('lastCh'=> $lastCh, 'reported'=> $reported, 'lastCo' => $lastCo));
 			return $view;
+		} else {
+			header('Location: index.php?action=adminConn');
+			exit;
+		}
 	}
 
 	public function chaptersList() {
