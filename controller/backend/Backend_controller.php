@@ -228,4 +228,10 @@ class Backend_controller extends Controller
 		}
 	}
 
+	public function disconnect () {
+		session_unset();
+		session_destroy();
+		header('Location: index.php?action=home');
+		exit;
+	}
 }

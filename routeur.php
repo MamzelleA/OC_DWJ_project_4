@@ -55,6 +55,8 @@ class Routeur {
 						$this->backendCtrl->see($id);
 					} else {throw new Exception('Le paramètre "' .$id. '" renseigné n\'est pas valide');}
 				}
+				elseif ($action == 'write'){$this->backendCtrl->write();}
+				elseif($action == 'disconnect'){$this->backendCtrl->disconnect();}
 				elseif ($action = 'modify'){
 					$id = $this->getParameter($_GET, 'id');
 					if(!empty($id) && is_numeric($id)) {
@@ -66,6 +68,8 @@ class Routeur {
 		catch (Exception $e) { //A REVOIR
 			$errMessage = $e->getMessage();
 			$errCode =$e->getCode();
+			$errLine = $e->getLine();
+			$errFile = $e->getFile();
 			require ('view/frontend/err_view.php');
 		}
 	}
