@@ -11,16 +11,16 @@ class Frontend_controller extends Controller
 		return $view;
 	}
 
-	public function chapters () {
-		$list = $this->chapters->getChapters(array('published', NULL));
+	public function chapters ($status) {
+		$list = $this->chapters->getChaptersByStatus($status);
 		$view = $this->view->genView(array('list' => $list));
 		return $view;
 	}
 
-	public function chapter ($num, $status) { //return chapter_view
+	public function chapter ($status, $num) {
 		$pConfirm = NULL;
 		$rConfirm = NULL;
-		$numsList = $this->listNumsCh(array('published', NULL)); //return array with number of all published chapters numbers
+		$numsList = $this->numsByStatus($status); //to control if num send in URL exist
 		if(in_array($num, $numsList)) {
 	    $chap = $this->chapters->getChapterByNum($num, $status);
 	    $chapId = $chap['id'];
@@ -66,7 +66,15 @@ class Frontend_controller extends Controller
 	  } else {throw new Exception('La page demandée n\'existe pas.');}
 	}
 
-	public function genericView ($action) { //legal and about
+	private function numsByStatus ($status) { //use in chapter
+		$list = $this->chapters->getListNumsNoTrashCh($status);
+	  for($i = 0; $i<count($list); $i++) {
+	    $numsList[] = $list[$i]['num_chap'];
+	  }
+		return $numsList;
+	}
+
+	public function genericView ($action) { //legal and about views
 		$view = $this->view->genView(array($action));
 		return $view;
 	}
