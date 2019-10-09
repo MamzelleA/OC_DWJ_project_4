@@ -48,7 +48,7 @@ class Chapters_manager extends Manager
 		return $result;
 	}
 
-	public function getListNumsCh ($status) { //chapter, chaptersList, modify
+	public function getListNumsCh ($status) { // Controller listNumsCh()
 		$sql = 'SELECT ch.id, num_chap, sch.id, id_chap
 				FROM chapters AS ch, status_chapter AS sch
 				WHERE sch.status_chap IN (?, ?)
@@ -143,5 +143,17 @@ class Chapters_manager extends Manager
 								WHERE id = ?';
 		$chap = $this->execRequest($sqlChap, array($title, $content, $chapterId));
 		return $chap;
+	}
+
+  public function addChapter ($number, $title, $content, $status)
+	{
+		//add a new chapter in db
+		$sqlChap = 'INSERT INTO chapters(num_chap, title_chap, content_chap, create_date)
+								VALUES (?, ?, ?, NOW())';
+		$this->execRequest($sqlChap, array($number, $title, $content));
+		$chapterId = $this->recoverId();
+		$sqlStat = 'INSERT INTO status_chapter(id_chap, status_chap)
+								VALUES (?, ?)';
+		$this->execRequest($sqlStat, array($chapterId, $status));
 	}
 }

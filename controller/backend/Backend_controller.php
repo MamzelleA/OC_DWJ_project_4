@@ -97,7 +97,6 @@ class Backend_controller extends Controller
 		if(isset($_SESSION['login']) && isset($_SESSION['password'])) {
 			$confirm = NULL;
 			$idsList = $this->chapters->getListIdsCh(array('published', 'draft')); //return array with number of all published and draft chapters
-var_dump($idsList);
 			if(in_array($chapId, $idsList)) {
 				$chapter = $this->chapters->getChapterById($chapId);
 				$comments = $this->comments->getLinkCo($chapId);
@@ -189,6 +188,44 @@ var_dump($idsList);
 	    $idsList[] = $list[$i]['id'];
 	  }
 		return $idsList;
+	}
+
+	public function write () { //return write_view + add new chapter in db
+		if(isset($_SESSION['login']) && isset($_SESSION['password'])) {
+			$lastNum = NULL;
+		  $confirm = NULL;
+		  $trouble = NULL;
+			if(isset($_POST['num']) && $_POST['num'] != ''){$_SESSION['num'] = $_POST['num'];}
+		  if(isset($_POST['title']) && $_POST['title'] != ''){$_SESSION['title'] = $_POST['title'];}
+		  if(isset($_POST['content']) && $_POST['content'] != ''){$_SESSION['content'] = $_POST['content'];}
+			if(isset($_POST['published'])) {
+		    if(!empty($_POST['num'] && !empty($_POST['title']) && !empty($_POST['content']))){
+		      $lastNum = $this->chapters->lastNum('published');//return the number (str) of the last published chapter in a bi-dimension array
+		      $next = intval($lastNum[0]['num_chap']) + 1;
+		      if($_POST['num'] == $next) {
+		        $this->chapters->addChapter ($_POST['num'], $_POST['title'], $_POST['content'], 'published');
+		        $confirm = 'Votre chapitre a bien été publié';
+		      } else {
+		        $trouble = 'ATTENTION ! Le chapitre n\'a pas pu être publié car : le numéro du chapitre n\'est pas cohérent, il devrait être égal à ' .$next.  '.';
+		      }
+		    } else {
+		      $trouble = 'Tous les champs doivent être renseignés.';
+		    }
+		  } elseif(isset($_POST['draft'])) {
+		    $numChaps = $this->listNumsCh(array('published', 'draft')); //return bi-dimension array with all the chap numbers not trashed
+		    if(in_array($_POST['num'], $numChaps)) {
+		      $confirm = 'Le chapitre a bien été enregistré en brouillon.<br>ATTENTION ! Le numéro de chapitre <span class="font-bold">' .$_POST['num']. '</span> existe déjà.';
+		    } else {
+		      $confirm = 'Le chapitre a bien été enregistré en brouillon.';
+		    }
+		    $this->chapters->addChapter ($_POST['num'], $_POST['title'], $_POST['content'], 'draft');
+		  }
+			$view = $this->view->genView(array('lastNum' => $lastNum, 'confirm' => $confirm, 'trouble' => $trouble));
+		  return $view;
+		} else {
+	  	header('Location: index.php?action=adminConn');
+	  	exit;
+		}
 	}
 
 }
