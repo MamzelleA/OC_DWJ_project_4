@@ -14,14 +14,11 @@ class Configuration {
   }
 
   private static function getDatas() {
-    $filePath = 'config.ini';
-    $result = file_exists($filePath);
+    $filePath = 'C:\wamp64\www\OC_DWJ_project_4\config\config.ini';
     if(SELF::$datas == null) {
-      //if(file_exists($filePath)){
+      if(file_exists($filePath)){
         SELF::$datas = parse_ini_file($filePath);
-      //} else {
-      //throw new exception('Aucune donnée de configuration n\'a été trouvée.');
-      //}
+      } else {throw new exception('Aucune donnée de configuration n\'a été trouvée.');}
     }
     return SELF::$datas;
   }
