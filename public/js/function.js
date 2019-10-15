@@ -43,12 +43,15 @@ $(document).ready(function(){
 	  StopAnimation();
 	});
 
-	tinymce.init({
-		selector:'editor',
-		height: 300,
-		toolbar: 'undo redo | fontselect | bold italic underline | alignleft aligncenter alignright alignjustify  | help',
-		font_formats: 'Arial=arial,helvetica,sans-serif; Domine=domine'
-	});
+	if($('#editor').length){
+		tinymce.init({
+			selector:'#editor',
+			height: 900,
+			language: 'fr_FR',
+			toolbar: 'undo redo | fontselect | bold italic underline | alignleft aligncenter alignright alignjustify  | help',
+			font_formats: 'Arial=arial,sans-serif; Domine=domine'
+		});
+	};
 
 
 
