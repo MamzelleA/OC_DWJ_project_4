@@ -80,6 +80,29 @@ class Backend_controller extends Controller
 			$confirm = NULL;
 			$chapters = $this->chapters->getChaptersByStatus($statusCh);
 			$comments = $this->comments->getCommentsByStatus($statusCo);
+			if(isset($_POST['delChap'])) {
+				$this->chapters->deleteCh($_POST['chapterId']);
+				$confirm = 'Le chapitre a été définitivement supprimé.';
+				$chapters = $this->chapters->getChaptersByStatus($statusCh);
+				$comments = $this->comments->getCommentsByStatus($statusCo);
+			} elseif(isset($_POST['restoreChap'])) {
+				$status = 'draft';
+				$this->chapters->updateStatusCh($status, $_POST['chapterId']);
+				$confirm = 'Le chapitre a été restauré avec un statut = ' .$status. '.';
+				$chapters = $this->chapters->getChaptersByStatus($statusCh);
+				$comments = $this->comments->getCommentsByStatus($statusCo);
+			} elseif (isset($_POST['delCom'])) {
+				$this->comments->deleteCo($_POST['commentId']);
+				$confirm = 'Le commentaire a été définitivement supprimé.';
+				$chapters = $this->chapters->getChaptersByStatus($statusCh);
+				$comments = $this->comments->getCommentsByStatus($statusCo);
+			} elseif(isset($_POST['restoreCom'])) {
+				$status = 'moderate';
+				$this->comments->updateStatusCo($status, $_POST['commentId']);
+				$confirm = 'Le chapitre a été restauré avec un statut = ' .$status. '.';
+				$chapters = $this->chapters->getChaptersByStatus($statusCh);
+				$comments = $this->comments->getCommentsByStatus($statusCo);
+			}
 			$view = $this->view->genView(array('chapters' => $chapters, 'comments' => $comments, 'confirm' => $confirm));
 			return $view;
 		} else {
@@ -190,7 +213,7 @@ class Backend_controller extends Controller
 		      $lastNum = $this->chapters->lastNum('published'); //return num (str) of the last published chapter in a bi-dimension array, control if POSTnum is consistent
 		      $next = intval($lastNum[0]['num_chap']) + 1;
 		      if($_POST['num'] == $next) {
-		        $this->chapters->addChapter ($_POST['num'], $_POST['title'], $_POST['content'], 'published');
+		        $this->chapters->addCh ($_POST['num'], $_POST['title'], $_POST['content'], 'published');
 		        $confirm = 'Votre chapitre a bien été publié';
 		      } else {
 		        $trouble = 'ATTENTION ! Le chapitre n\'a pas pu être publié car : le numéro du chapitre n\'est pas cohérent, il devrait être égal à ' .$next.  '.';
@@ -205,7 +228,7 @@ class Backend_controller extends Controller
 		    } else {
 		      $confirm = 'Le chapitre a bien été enregistré en brouillon.';
 		    }
-		    $this->chapters->addChapter ($_POST['num'], $_POST['title'], $_POST['content'], 'draft');
+		    $this->chapters->addCh ($_POST['num'], $_POST['title'], $_POST['content'], 'draft');
 		  }
 			$view = $this->view->genView(array('lastNum' => $lastNum, 'confirm' => $confirm, 'trouble' => $trouble));
 		  return $view;

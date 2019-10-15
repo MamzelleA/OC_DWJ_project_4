@@ -84,23 +84,23 @@ if (!empty($_POST)) {
 </div>
 <div class ="row mx-1">
 	<?php
-	if (empty($comment)){
+	if (empty($comments)){
 		echo '<p>Il n\'y a actuellement aucun commentaire supprimé.</p>';
 	} else {
 	?>
-		<table class="col-sm-12 table">
+		<table class="col-md-12 table">
 			<thead class="thead-primary">
 				<tr>
 					<th scope="col-1" class="text-center">Chapitre</th>
-					<th scope="col-4">Auteur</th>
+					<th scope="col-3">Auteur</th>
 					<th scope="col-3">Ecrit le</th>
-					<th scope="col-3">Contenu</th>
+					<th scope="col-4">Contenu</th>
 					<th class="text-center" scope="col-1" colspan="2">Actions</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php
-				foreach ($comment as $tcom):
+				foreach ($comments as $tcom):
 				?>
 					<tr>
 						<td class="text-center"><?= $tcom['num_chap'] ?></td>

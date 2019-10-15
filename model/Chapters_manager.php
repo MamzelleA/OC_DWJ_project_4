@@ -128,7 +128,7 @@ class Chapters_manager extends Manager
 		return $result;
 	}
 
-  //CRUD
+  //Create / Update
   public function updateStatusCh ($status, $chapterId) { //chaptersList
 
 		$sql = 'UPDATE status_chapter
@@ -144,8 +144,7 @@ class Chapters_manager extends Manager
 										content_chap = ?,
 										modify_date = NOW()
 								WHERE id = ?';
-		$chap = $this->execRequest($sqlChap, array($number, $title, $content, $chapterId));
-		return $chap;
+		$this->execRequest($sqlChap, array($number, $title, $content, $chapterId));
 	}
 
 	public function updatePublished ($title, $content, $chapterId) { //modify
@@ -154,19 +153,18 @@ class Chapters_manager extends Manager
 										content_chap = ?,
 										modify_date = NOW()
 								WHERE id = ?';
-		$chap = $this->execRequest($sqlChap, array($title, $content, $chapterId));
-		return $chap;
+		$this->execRequest($sqlChap, array($title, $content, $chapterId));
 	}
 
 
-    public function deleteChapter ($chapterId)	{ //trash
+    public function deleteCh ($chapterId)	{ //trash
   		$sql = 'DELETE
   						FROM chapters
   						WHERE id = ?';
   		$this->execRequest($sql, array($chapterId));
   	}
 
-  public function addChapter ($number, $title, $content, $status) { //write
+  public function addCh ($number, $title, $content, $status) { //write
 		$sqlChap = 'INSERT INTO chapters(num_chap, title_chap, content_chap, create_date)
 								VALUES (?, ?, ?, NOW())';
 		$this->execRequest($sqlChap, array($number, $title, $content));
