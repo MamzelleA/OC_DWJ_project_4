@@ -116,7 +116,7 @@ Class Comments_Manager extends Manager
 		$this->execRequest($sql, array($status, $commentId));
 	}
 
-  public function deleteComment ($commentId) { //trash
+  public function deleteCo ($commentId) { //trash
 		$sql = 'DELETE
 				    FROM comments
 				    WHERE id = ?';

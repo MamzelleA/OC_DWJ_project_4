@@ -42,8 +42,8 @@ class Frontend_controller extends Controller
 	              $authors[] = $listAuthor[$i]['author'];
 	              $emails[] = $listAuthor[$i]['email'];
 	            }
-							$inArrayE = in_array($_POST['email'], $emails);
-							$inArrayA = in_array($_POST['author'], $authors);
+							$inArrayE = in_array($_POST['email'], $emails); //compare inquire email with result from db, bool
+							$inArrayA = in_array($_POST['author'], $authors); //compare inquire author with result from db, bool
 							if($inArrayE == true && ($_POST['author'] !== $authorDb[0]['author'])) {
 								$pConfirm = 'L\'email renseigné existe déjà avec un auteur différent. Un email ne peut être associé qu\'à un seul auteur.';
 							} elseif ($inArrayA == true && ($_POST['email'] !== $emailDb[0]['email'])) {
@@ -67,7 +67,7 @@ class Frontend_controller extends Controller
 	}
 
 	private function numsByStatus ($status) { //use in chapter
-		$list = $this->chapters->getListNumsNoTrashCh($status);
+		$list = $this->chapters->getListNumsByStatusCh($status);
 	  for($i = 0; $i<count($list); $i++) {
 	    $numsList[] = $list[$i]['num_chap'];
 	  }

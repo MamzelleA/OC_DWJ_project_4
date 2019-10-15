@@ -7,24 +7,22 @@ if (isset($_POST['author']) && $_POST['author'] != ''){setcookie('author',$_POST
 $this->title = $chapter['title_chap'];
 ?>
 <div class="row">
-	<div class="col">
-		<h2 class="text-left ml-5">Chapitre <span class="badge badge-pill badge-primary" id="bg-num-chap"><?= $chapter['num_chap'] ?></span> | <?= $chapter['title_chap'] ?></h2>
+	<div class="col-md-12">
+		<h2 class="text-left ml-5 mb-0">Chapitre <span class="badge badge-pill badge-primary" id="bg-num-chap"><?= $chapter['num_chap'] ?></span> | <?= $chapter['title_chap'] ?></h2>
+		<?php
+		if (NULL !== $chapter['modify_date_fr']) {
+			echo '<p class="small-p ml-5 mt-0">écrit le ' .$chapter['create_date_fr']. ', modifié le ' .$chapter['modify_date_fr']. '</p>';
+		} else {
+			echo '<p class="small-p ml-5 mt-0"><i>écrit le ' .$chapter['create_date_fr']. '</i></p>';
+		}
+		?>
 	</div>
 </div>
 <div class="row">
-		<div class="col-md-10 offset-md-2">
-			<p class="content-chap fr-view"><span id="lettrine"><?= substr(strip_tags($chapter['content_chap']), 0, 1) ?></span><?=substr(strip_tags($chapter['content_chap'], '<br>'), 1) ?></p>
+		<div class="col-md-9 offset-md-1">
+			<?php echo $chapter['content_chap']; ?>
 		</div>
-		<div class="col-md-10 offset-md-2 date-chap">
-			<?php
-			if (NULL !== $chapter['modify_date_fr']) {
-				echo '<p class="text-right mr-3"><i>modifié le ' .$chapter['modify_date_fr']. ' | écrit le ' .$chapter['create_date_fr']. '</i></p>';
-			} else {
-				echo '<p class="text-right mr-3"><i>écrit le ' .$chapter['create_date_fr']. '</i></p>';
-			}
-			?>
-		</div>
-		<div class="col-md-10 offset-md-2 btn-chap">
+		<div class="col-md-9 offset-md-1 btn-chap">
 			<?php
 			$countChapInt = intval($countChap[0]);
 			$prevChap = $chapter['num_chap'] - 1;
@@ -43,7 +41,7 @@ $this->title = $chapter['title_chap'];
 		</div>
 </div>
 <div class="row">
-	<div class="col-md-10 offset-md-2 mr-3" id="comment-place">
+	<div class="col-md-9 offset-md-1" id="comment-place">
 		<hr>
 		<h3>REDIGER UN <b>COMMENTAIRE</b></h3>
 		<p class="text-justify">Vous êtes libres de laisser vos commentaires dans cet espace. Toutefois, ceux-ci doivent respecter la "Charte des commentaires" consultable <a class="visible-link" href="<?='index.php?action=legal#charte'?>">ici</a>.</p>
@@ -60,11 +58,11 @@ $this->title = $chapter['title_chap'];
 			<div class="form-group">
 				<label for="email">Email : <span data-toggle="collapse" role="button" href="#dropdownP" aria-expanded="false" aria-controls="author-resume" title="Pourquoi je dois laisser un email ?"><i class="far fa-question-circle"></i></span></label></i>
 				<p class="p-little collapse" id="dropdownP">Dans un souci de responsabilisation, nous vous demandons d'indiquer un email valide pour laisser un commentaire. ATTENTION ! Un email ne peut être associé qu'à un seul auteur. Pour plus d'informations sur l'utilisation de vos données personnelles, reportez-vous aux Mentions légales <a href="index.php?action=legal#cookie">ici</a></p>
-				<input class="form-control" type="email" id="email" name="email" value="<?php if(isset($_SESSION['email'])){echo $_SESSION['email'];} ?>"/>
+				<input class="form-control text-field" type="email" id="email" name="email" value="<?php if(isset($_SESSION['email'])){echo $_SESSION['email'];} ?>"/>
 			</div>
 			<div class="form-group">
 				<label for="author">Auteur :</label>
-				<input class="form-control" type="text" id="author" name="author" value="<?php if(isset($_SESSION['author'])){ echo $_SESSION['author'];} elseif(isset($_COOKIE['author'])){ echo $_COOKIE['author'];} ?>"/>
+				<input class="form-control text-field" type="text" id="author" name="author" value="<?php if(isset($_SESSION['author'])){ echo $_SESSION['author'];} elseif(isset($_COOKIE['author'])){ echo $_COOKIE['author'];} ?>"/>
 			</div>
 			<div class="form-group">
 				<label for="message">Votre message :</label>
@@ -92,7 +90,7 @@ $this->title = $chapter['title_chap'];
 		} else {
 			echo "<p>Commentaires publiés : <span class=\"badge badge-primary badge-pill\">" .$countComInt. "</span></p>";
 		}
-		foreach($comment as $com) {
+		foreach($comment as $com):
 			?>
 			<p>le <?= $com['add_date_fr'] ?> | <b><?= $com['author'] ?></b> a écrit :<br>
 			<?php
@@ -125,8 +123,7 @@ $this->title = $chapter['title_chap'];
 			<?php
 			}
 			echo '<hr class="small-hr">';
-		}
-		unset($comment);
+		endforeach;
 		?>
 	</div>
 </div><!-- //ROW -->

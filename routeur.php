@@ -33,11 +33,11 @@ class Routeur {
 					$action = $_GET['action'];
 					//USER
 					if($action == 'home') {$this->frontendCtrl->home('published', 'published');}
-					elseif ($action == 'chapters') {$this->frontendCtrl->chapters();}
+					elseif ($action == 'chapters') {$this->frontendCtrl->chapters('published');}
 					elseif ($action == 'chapter'){
 						$num = $_GET['num'];
 						if(!empty($num) && is_numeric($num)) {
-							$this->frontendCtrl->chapter($num, 'published');
+							$this->frontendCtrl->chapter('published', $num);
 						} else {throw new Exception('Le paramètre "' .$num. '" renseigné n\'est pas valide');}
 					}
 					elseif ($action == 'about'){$this->frontendCtrl->genericView('about');}
@@ -65,12 +65,9 @@ class Routeur {
 					else {throw new Exception('L\'action définie n\'existe pas.');}
 				} else {throw new Exception('Le paramètre défini n\'est pas valide.');
 				}
-			} else	{
-				//$action = 'home';
-				$this->frontendCtrl->home('published', 'published');
-			}
+			} else	{$this->frontendCtrl->home('published', 'published');}
 		}
-		catch (Exception $e) { //A REVOIR
+		catch (Exception $e) {
 			$action = 'err';
 			$this->errorCatcher($action, $e);
 		}

@@ -25,7 +25,7 @@ class Backend_controller extends Controller
 			$arrayDuplicate = array_count_values($listNums);
 			if (isset($_POST['trash'])) {
 				$this->chapters->updateStatusCh('trashed', $_POST['chapterId']);
-				$confirm = 'Le chapitre et les commentaires associés ont bien été placés dans la corbeille.';
+				$confirm = 'Le chapitre a bien été placé dans la corbeille.';
 				$chapters = $this->chaptersNoTrashAndCount();
 			} elseif (isset($_POST['valid'])) {
 				$select = $_POST['select'];
@@ -78,7 +78,7 @@ class Backend_controller extends Controller
 	public function trash ($statusCh, $statusCo){
 		if(isset($_SESSION['login']) && isset($_SESSION['password'])) {
 			$confirm = NULL;
-			$chapters = $this->chapters->getChaptersByStatus($statusCh);
+			$chapters = $this->chapters->getChaptersByStatus('trashed');
 			$comments = $this->comments->getCommentsByStatus($statusCo);
 			if(isset($_POST['delChap'])) {
 				$this->chapters->deleteCh($_POST['chapterId']);
@@ -86,9 +86,8 @@ class Backend_controller extends Controller
 				$chapters = $this->chapters->getChaptersByStatus($statusCh);
 				$comments = $this->comments->getCommentsByStatus($statusCo);
 			} elseif(isset($_POST['restoreChap'])) {
-				$status = 'draft';
-				$this->chapters->updateStatusCh($status, $_POST['chapterId']);
-				$confirm = 'Le chapitre a été restauré avec un statut = ' .$status. '.';
+				$this->chapters->updateStatusCh('draft', $_POST['chapterId']);
+				$confirm = 'Le chapitre a été restauré avec un statut = "brouillon".';
 				$chapters = $this->chapters->getChaptersByStatus($statusCh);
 				$comments = $this->comments->getCommentsByStatus($statusCo);
 			} elseif (isset($_POST['delCom'])) {
@@ -97,9 +96,8 @@ class Backend_controller extends Controller
 				$chapters = $this->chapters->getChaptersByStatus($statusCh);
 				$comments = $this->comments->getCommentsByStatus($statusCo);
 			} elseif(isset($_POST['restoreCom'])) {
-				$status = 'moderate';
-				$this->comments->updateStatusCo($status, $_POST['commentId']);
-				$confirm = 'Le chapitre a été restauré avec un statut = ' .$status. '.';
+				$this->comments->updateStatusCo('moderate', $_POST['commentId']);
+				$confirm = 'Le chapitre a été restauré avec un statut = "modéré".';
 				$chapters = $this->chapters->getChaptersByStatus($statusCh);
 				$comments = $this->comments->getCommentsByStatus($statusCo);
 			}
