@@ -11,7 +11,7 @@ $this->subtitle = 'Suivez ici la création de son nouveau roman';
 		if (!empty($_COOKIE['readDate'])) {
 			$readDate = date('d/m/Y', $_COOKIE['readDate']);
 			$readNext = $_COOKIE['numLastChap']+1;
-			$countChap = intVal($count[0]);
+			$countChap = intVal($countCh[0]);
 		?>
 			<div class="alert alert-primary alert-dismissible fade show text-center mb-0 cookie-inform" role="alert">
 				<?php
@@ -48,8 +48,8 @@ $this->subtitle = 'Suivez ici la création de son nouveau roman';
 					<img class="d-block w-100" src="public/images/body2.jpg" alt="...">
 					<div class="carousel-caption d-block">
 						<a href="index.php?action=chapter&num=<?= $lastCh[0]['num_chap'] ?>" title ="lire le chapitre">
-							<h4>CHAPITRE <?= '<b>' .$lastCh[0]['num_chap'].'</b> | écrit le '.$lastCh[0]['create_date_fr'] ?></h4>
-							<h2><?= ($lastCh[0]['title_chap']) ?></h2>
+							<h2>CHAPITRE <?= '<b>' .$lastCh[0]['num_chap'].'</b> | ' .$lastCh[0]['title_chap']; ?></h2>
+							<p><?= 'écrit le '.$lastCh[0]['create_date_fr']; ?></p>
 						</a>
 					</div>
 				</div>
@@ -57,8 +57,8 @@ $this->subtitle = 'Suivez ici la création de son nouveau roman';
 					<img class="d-block w-100" src="public/images/body3.jpg" alt="...">
 					<div class="carousel-caption d-block">
 						<a href="index.php?action=chapter&num=<?= $lastCh[1]['num_chap'] ?>" title ="lire le chapitre">
-							<h4>CHAPITRE <?= '<b>' .$lastCh[1]['num_chap'].'</b> | écrit le '.$lastCh[1]['create_date_fr'] ?></h4>
-							<h2><?= ($lastCh[1]['title_chap'])?></h2>
+							<h2>CHAPITRE <?= '<b>' .$lastCh[1]['num_chap'].'</b> | ' .$lastCh[1]['title_chap']; ?></h2>
+							<p><?= 'écrit le '.$lastCh[1]['create_date_fr']; ?></p>
 						</a>
 					</div>
 				</div>
@@ -66,8 +66,8 @@ $this->subtitle = 'Suivez ici la création de son nouveau roman';
 					<img class="d-block w-100" src="public/images/body4.jpg" alt="...">
 					<div class="carousel-caption d-block">
 						<a href="index.php?action=chapter&num=<?= $lastCh[2]['num_chap'] ?>" title ="lire le chapitre">
-							<h4>CHAPITRE <?= '<b>' .$lastCh[2]['num_chap'].'</b> | écrit le '.$lastCh[2]['create_date_fr'] ?></h4>
-							<h2><?= ($lastCh[2]['title_chap'])?></h2>
+							<h2>CHAPITRE <?= '<b>' .$lastCh[2]['num_chap'].'</b> | ' .$lastCh[2]['title_chap']; ?></h2>
+							<p><?= 'écrit le '.$lastCh[2]['create_date_fr']; ?></p>
 						</a>
 					</div>
 				</div>
@@ -96,16 +96,15 @@ $this->subtitle = 'Suivez ici la création de son nouveau roman';
 		if(empty($lastCo)) {
 			echo '<p class="text-center">Il n\'y a aucun commentaire publié actuellement. Soyez le premier !</p>';
 		} else {
-			foreach ($lastCo as $lcom) {
+			foreach ($lastCo as $lcom):
 				?>
 				<blockquote class="blockquote px-3">
-					<p class="mb-0 text-center"><i class="fas fa-quote-left small-fa"></i> <?= $lcom['content_co'] ?> <i class="fas fa-quote-right small-fa"></i></p>
-					<footer class="blockquote-footer text-center">par <?= $lcom['author'] ?><cite title="Source Title"> à propos du chapitre <?= $lcom['num_chap'] ?> | <?= $lcom['title_chap'] ?></cite></footer>
+					<p class="mb-0 text-justify"><i class="fas fa-quote-left small-fa"></i> <?= $lcom['content_co'] ?> <i class="fas fa-quote-right small-fa"></i></p>
+					<footer class="blockquote-footer text-left">par <?= $lcom['author'] ?><cite title="Source Title"> à propos du chapitre <?= $lcom['num_chap'] ?> | <?= $lcom['title_chap'] ?></cite></footer>
 				</blockquote>
 			<?php
-			}
+			endforeach;
 		}
-		unset($lastCo);
 		?>
 	</div>
 </div>

@@ -25,11 +25,11 @@ $this->title = 'Connection';
 				<div class="form-group">
 					<div class="col-sm-6 mb-3">
 						<label for="numChap">Identifiant :</label>
-						<input class="form-control " type="text" id="num-chap" name="login"/>
+						<input class="form-control text-field" type="text" id="num-chap" name="login"/>
 					</div>
 					<div class="col-sm-6 mb-3">
 						<label for="titleChap">Mot de passe :</label>
-						<input class="form-control" type="password" id="title" name="password"/>
+						<input class="form-control text-field" type="password" id="title" name="password"/>
 					</div>
 				</div>
 				<div class="col-sm-6">

@@ -63,7 +63,7 @@ class Frontend_controller extends Controller
 			}
 			$view = $this->view->genView(array('chapter'=> $chap,'comment'=> $com, 'countCom'=> $countCom, 'countChap' => $countChap,  'pConfirm' => $pConfirm, 'rConfirm' => $rConfirm));
 	    return $view;
-	  } else {throw new Exception('La page demandée n\'existe pas.');}
+	  } else {throw new Exception('Le numéro de chapitre demandé n\'existe pas.');}
 	}
 
 	private function numsByStatus ($status) { //use in chapter
@@ -89,7 +89,6 @@ class Frontend_controller extends Controller
 					$confirm = 'Tous les champs doivent être renseignés';
 				} else {
 					$log = $this->admin->getLog($_POST['login'], $_POST['password']);
-					var_dump($log);
 					if(!empty($log)) {
 						$_SESSION['login'] = $log[0]['login'];
 						$_SESSION['password'] = $log[0]['password'];

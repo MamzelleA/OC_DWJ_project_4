@@ -6,7 +6,7 @@ h4 {font-family: 'Quicksand', sans-serif;}
 p, a, li, label,textarea, td, th, .alert {font-family: 'QuickSand', sans-serif; font-size: 1em;}
 .text-field {font-family: 'Special Elite', cursive;}
 .small-h4 {font-size: 0.5em;}
-.small-fa {font-size: 0.8em;}
+.small-fa, .small-p {font-size: 0.8em;}
 tr, td, th {font-size: 1.2em;}
 a {color: unset;}
 a:hover {text-decoration: unset;}
@@ -21,8 +21,10 @@ hr {border: solid 0.1em #007bff;}
 .col {padding: 0;}
 .row{ margin: 0.8em 0 0.5em 0;}
 .no-border-btn {border: none;}
-.fa-times, .fa-paper-plane, .fab-about, .fa-book-reader, .fa-edit, .fa-bookmark, .fa-plus-circle, .fa-exclamation-circle, .fa-question-circle {color: #007bff;}
+.fa-times, .fa-paper-plane, .fab-about, .fa-book-reader, .fa-edit, .fa-bookmark, .fa-plus-circle, .fa-exclamation-circle, .fa-question-circle, .fa-unlink {color: #007bff;}
 .fas, .far, .fab, .fa {font-size: 1.5em;}
+.fa-unlink {font-size: 5em;}
+.fa-ban {font-size: 0.8em;}
 
 /*SCROLLUP WINDOW*/
 .scrollup {
@@ -61,18 +63,6 @@ hr {border: solid 0.1em #007bff;}
 .home-h3 {font-family: 'QuickSand', sans-serif;}
 
 /*PAGES*/
-/*chapter view*/
-#lettrine
-{
-    font-size : 4em;
-    font-family : 'Over the Rainbow', cursive;
-    font-weight : bold;
-    text-indent: 0;
-    line-height: 1em;
-    padding-right: 0.2em;
-    float : left;
-}
-
 /*about view*/
 .author-word {font-family: 'Over the Rainbow', cursive; font-size: 1.2em}
 

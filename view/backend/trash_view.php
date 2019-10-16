@@ -1,20 +1,14 @@
 <?php
 $this->title = 'Corbeille';
-if (!empty($_POST)) {
-	if (isset($_POST['delChap'])) {$confirmChap = 'Le chapitre et ses commentaires ont été définitivement supprimés';}
-	elseif (isset($_POST['restoreChap'])) {$confirmChap = 'Le chapitre a été enregistré comme brouillon.';}
-	elseif (isset($_POST['delCom'])) {$confirmCom = 'Le commentaire a été définitivement supprimé';}
-	elseif (isset($_POST['restoreCom'])) {$confirmCom = 'Le commentaire est enregistré avec un statut modéré.';}
-}
 ?>
 <div class="row">
 	<div class="col-sm-12">
 		<h2 class="text-center">CHAPITRES <b>SUPPRIMES</b></h2>
 		<?php
-		if (isset($confirmChap)){
+		if (isset($confirm)){
 		?>
 			<div class="alert alert-primary alert-dismissible fade show" role="alert">
-				<?php echo $confirmChap;?>
+				<?php echo $confirm;?>
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			</div>
 		<?php
@@ -22,10 +16,10 @@ if (!empty($_POST)) {
 		?>
 	</div>
 </div>
-<div class ="row mx-1">
+<div class ="row mx-3">
 	<?php
-	if (empty($chapter)){
-		echo '<p>Il n\'y a actuellement aucun chapitre supprimé</p>';
+	if (empty($chapters)){
+		echo '<p class="text-center">Il n\'y a actuellement aucun chapitre supprimé</p>';
 	} else {
 	?>
 		<table class="col-sm-12 table">
@@ -34,20 +28,17 @@ if (!empty($_POST)) {
 					<th scope="col-1" class="text-center">Chapitre</th>
 					<th scope="col-5">Titre</th>
 					<th scope="col-3">Ecrit le</th>
-					<th class="text-center" scope="col-1" colspan="3">Actions</th>
+					<th class="text-center" scope="col-1" colspan="2">Actions</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php
-				foreach ($chapter as $tchap):
+				foreach ($chapters as $tchap):
 				?>
 					<tr>
 						<td class="text-center"><?= $tchap['num_chap'] ?></td>
 						<td><?= $tchap['title_chap'] ?></td>
 						<td><?= $tchap['create_date_fr'] ?></td>
-						<td class="text-center">
-							<a href="<?='index.php?action=see&id=' . $tchap['id']?>" class="btn btn-outline-primary  btn-fa no-border-btn" role="button" title="lire"><i class="fas fa-book-reader"></i></a>
-						</td>
 						<form name="admin-delete" method="post" action="">
 							<input type="hidden" name="chapterId" value="<?= $tchap['id'] ?>"/>
 							<td class="text-center">
@@ -70,22 +61,12 @@ if (!empty($_POST)) {
 <div class="row">
 	<div class="col-sm-12">
 		<h2 class="text-center">COMMENTAIRES <b>SUPPRIMES</b></h2>
-		<?php
-		if (isset($confirmCom)){
-		?>
-			<div class="alert alert-primary alert-dismissible fade show" role="alert">
-				<?php echo $confirmCom;?>
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			</div>
-		<?php
-		}
-		?>
 	</div>
 </div>
-<div class ="row mx-1">
+<div class ="row mx-3">
 	<?php
 	if (empty($comments)){
-		echo '<p>Il n\'y a actuellement aucun commentaire supprimé.</p>';
+		echo '<p class="text-center">Il n\'y a actuellement aucun commentaire supprimé.</p>';
 	} else {
 	?>
 		<table class="col-md-12 table">
