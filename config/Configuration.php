@@ -14,7 +14,7 @@ class Configuration {
   }
 
   private static function getDatas() {
-    $filePath = 'C:\wamp64\www\OC_DWJ_project_4\config\config.ini';
+    $filePath = 'C:\wamp64\www\OC_DWJ_project_4\config\access\config.ini';
     if(SELF::$datas == null) {
       if(file_exists($filePath)){
         SELF::$datas = parse_ini_file($filePath);
