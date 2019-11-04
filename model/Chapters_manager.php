@@ -147,9 +147,10 @@ class Chapters_manager extends Manager
 		$this->execRequest($sqlChap, array($number, $title, $content, $chapterId));
 	}
 
-	public function updatePublished ($title, $content, $chapterId) { //modify
+	public function updatePublished ($num = null, $title, $content, $chapterId) { //modify
 		$sqlChap = 'UPDATE chapters
-								SET title_chap = ?,
+								SET num_chap = ?,
+                    title_chap = ?,
 										content_chap = ?,
 										modify_date = NOW()
 								WHERE id = ?';
