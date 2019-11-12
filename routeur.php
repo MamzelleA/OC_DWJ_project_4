@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once ('controller/frontend/Frontend_controller.php');
 require_once ('controller/backend/Backend_controller.php');
 require_once ('view/View.php');
@@ -13,16 +12,6 @@ class Routeur {
 	{
 		$this->frontendCtrl = new Frontend_controller('frontend', $action, 'user');
 		$this->backendCtrl = new Backend_controller('backend', $action, 'admin');
-	}
-
-	private function errorCatcher ($action, Exception $e) {
-		$objectView = new View('frontend', $action, 'user');
-		$errMessage = $e->getMessage();
-		$errCode =$e->getCode();
-		$errLine = $e->getLine();
-		$errFile = $e->getFile();
-		$view = $objectView->genView(array('errMessage' => $errMessage, 'errCode' => $errCode, 'errLine' => $errLine, 'errFile' => $errFile));
-		return $view;
 	}
 
 	public function driveRequest ()
@@ -63,13 +52,15 @@ class Routeur {
 					elseif ($action == 'write'){$this->backendCtrl->write();}
 					elseif($action == 'disconnect'){$this->backendCtrl->disconnect();}
 					else {throw new Exception('L\'action définie n\'existe pas.');}
-				} else {throw new Exception('Le paramètre défini n\'est pas valide.');
-				}
+				} else {throw new Exception('Le paramètre défini n\'est pas valide.');}
 			} else	{$this->frontendCtrl->home('published', 'published');}
 		}
 		catch (Exception $e) {
-			$action = 'err';
-			$this->errorCatcher($action, $e);
+			$errMessage = $e->getMessage();
+			$errLine = $e->getLine();
+			$errFile = $e->getFile();
+			$view = new View('frontend', 'err', 'user');
+			$err = $view->genView(array('errMessage' => $errMessage, 'errLine' => $errLine, 'errFile' => $errFile));
 		}
 	}
 }

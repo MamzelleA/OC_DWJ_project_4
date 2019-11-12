@@ -62,16 +62,8 @@ class Frontend_controller extends Controller
 				}
 			}
 			$view = $this->view->genView(array('chapter'=> $chap,'comment'=> $com, 'countCom'=> $countCom, 'countChap' => $countChap,  'pConfirm' => $pConfirm, 'rConfirm' => $rConfirm));
-	    return $view;
+			return $view;
 	  } else {throw new Exception('Le numéro de chapitre demandé n\'existe pas.');}
-	}
-
-	private function numsByStatus ($status) { //use in chapter
-		$list = $this->chapters->getListNumsByStatusCh($status);
-	  for($i = 0; $i<count($list); $i++) {
-	    $numsList[] = $list[$i]['num_chap'];
-	  }
-		return $numsList;
 	}
 
 	public function genericView ($action) { //legal and about views
@@ -100,5 +92,14 @@ class Frontend_controller extends Controller
 		}
 		$view = $this->view->genView(array('login' => $login, 'password' => $password, 'confirm' => $confirm));
 		return $view;
+	}
+
+//SUPPORT METHODS FOR ACTIONS
+	private function numsByStatus ($status) { //use in chapter
+		$list = $this->chapters->getListNumsByStatusCh($status);
+		for($i = 0; $i<count($list); $i++) {
+			$numsList[] = $list[$i]['num_chap'];
+		}
+		return $numsList;
 	}
 }
