@@ -3,7 +3,19 @@ require_once('Manager.php');
 
 class Chapters_manager extends Manager
 {
-  public function getLastThreeCh () { //home
+  //Create ADMIN ONLY
+  public function addCh ($number, $title, $content, $status) { //write
+		$sqlChap = 'INSERT INTO chapters(num_chap, title_chap, content_chap, create_date)
+								VALUES (?, ?, ?, NOW())';
+		$this->execRequest($sqlChap, array($number, $title, $content));
+		$chapterId = $this->recoverId();
+		$sqlStat = 'INSERT INTO status_chapter(id_chap, status_chap)
+								VALUES (?, ?)';
+		$this->execRequest($sqlStat, array($chapterId, $status));
+	}
+
+  //Read
+  public function getLastThreeCh () { //USER home
 	  $sql = 'SELECT ch.id, num_chap, title_chap, DATE_FORMAT(create_date, \'%d/%m/%Y\') AS create_date_fr, DATE_FORMAT (modify_date, \'%d/%m/%Y\') AS modify_date_fr
 				    FROM chapters ch
 				    INNER JOIN status_chapter sch
@@ -13,19 +25,21 @@ class Chapters_manager extends Manager
 				    LIMIT 3';
 		$chap = $this->execRequest($sql);
 		$result = $chap->fetchAll(PDO::FETCH_ASSOC);
+    $chap->closeCursor();
 		return $result;
 	}
 
-  public function countStatusCh ($status) { //home
+  public function countStatusCh ($status) { //USER home
     $sql = 'SELECT COUNT(*)
 				    FROM status_chapter
 				    WHERE status_chap = ?';
 		$count = $this->execRequest($sql, array($status));
 		$result = $count->fetch();
+    $count->closeCursor();
 		return $result;
   }
 
-    public function getChaptersNoTrash () { // chaptersList
+    public function getChaptersNoTrash () { // ADMIN chaptersList
   		$sql = 'SELECT ch.id, num_chap, title_chap, content_chap, DATE_FORMAT(create_date, \'%d/%m/%Y\') AS create_date_fr, DATE_FORMAT (modify_date, \'%d/%m/%Y\') AS modify_date_fr, sch.id, id_chap, status_chap
   						FROM chapters AS ch, status_chapter AS sch
   						WHERE NOT sch.status_chap = \'trashed\'
@@ -33,10 +47,11 @@ class Chapters_manager extends Manager
   						ORDER BY num_chap DESC';
   		$chap = $this->execRequest($sql);
   		$result = $chap->fetchAll(PDO::FETCH_ASSOC);
+      $chap->closeCursor();
   		return $result;
   	}
 
-	public function getChaptersByStatus ($status) { //chapters, trash
+	public function getChaptersByStatus ($status) { //USER chapters, ADMIN trash
 		$sql = 'SELECT ch.id, num_chap, title_chap, content_chap, DATE_FORMAT(create_date, \'%d/%m/%Y\') AS create_date_fr, DATE_FORMAT (modify_date, \'%d/%m/%Y\') AS modify_date_fr, sch.id, id_chap, status_chap
 						FROM chapters AS ch, status_chapter AS sch
 						WHERE sch.status_chap = ?
@@ -44,10 +59,11 @@ class Chapters_manager extends Manager
 						ORDER BY num_chap DESC';
 		$chap = $this->execRequest($sql, array($status));
 		$result = $chap->fetchAll(PDO::FETCH_ASSOC);
+    $chap->closeCursor();
 		return $result;
 	}
 
-	public function getChapterByNum ($num, $status) { //chapter
+	public function getChapterByNum ($num, $status) { //USER chapter
 		$sql = 'SELECT ch.id, num_chap, title_chap, content_chap, DATE_FORMAT(create_date, \'%d/%m/%Y\') AS create_date_fr, DATE_FORMAT (modify_date, \'%d/%m/%Y\') AS modify_date_fr
 						FROM chapters ch
 						INNER JOIN status_chapter sch
@@ -56,10 +72,11 @@ class Chapters_manager extends Manager
 						AND sch.status_chap = ?';
 		$chap = $this->execRequest($sql, array($num, $status));
 		$result = $chap->fetch(PDO::FETCH_ASSOC);
+    $chap->closeCursor();
 		return $result;
 	}
 
-	public function getListNumsNoTrashCh () { // chaptersList, modify
+	public function getListNumsNoTrashCh () { // ADMIN chaptersList, modify
 		$sql = 'SELECT ch.id, num_chap, sch.id, id_chap
 				FROM chapters AS ch, status_chapter AS sch
 				WHERE NOT sch.status_chap = \'trashed\'
@@ -67,10 +84,11 @@ class Chapters_manager extends Manager
 				ORDER BY num_chap';
 		$chap = $this->execRequest($sql);
 		$result = $chap->fetchAll(PDO::FETCH_ASSOC);
+    $chap->closeCursor();
 		return $result;
 	}
 
-  public function getListNumsByStatusCh ($status) { // chapter
+  public function getListNumsByStatusCh ($status) { // USER chapter
 		$sql = 'SELECT ch.id, num_chap, sch.id, id_chap
 				FROM chapters AS ch, status_chapter AS sch
 				WHERE sch.status_chap = ?
@@ -78,6 +96,7 @@ class Chapters_manager extends Manager
 				ORDER BY num_chap';
 		$chap = $this->execRequest($sql, array($status));
 		$result = $chap->fetchAll(PDO::FETCH_ASSOC);
+    $chap->closeCursor();
 		return $result;
 	}
 
@@ -90,10 +109,11 @@ class Chapters_manager extends Manager
   			    LIMIT 6';
   	$chap = $this->execRequest($sql);
   	$result = $chap->fetchAll(PDO::FETCH_ASSOC);
+    $chap->closeCursor();
   	return $result;
   }
 
-  public function getChapterById ($chapterId) //see, modify
+  public function getChapterById ($chapterId) //ADMIN see, modify
 	{
 		$sql = 'SELECT ch.id, num_chap, title_chap, content_chap, DATE_FORMAT(create_date, \'%d/%m/%Y\') AS create_date_fr, DATE_FORMAT (modify_date, \'%d/%m/%Y\') AS modify_date_fr, id_chap, status_chap
 				FROM chapters AS ch, status_chapter AS sch
@@ -101,10 +121,11 @@ class Chapters_manager extends Manager
 				AND ch.id = ?';
 		$chap = $this->execRequest($sql, array($chapterId));
 		$result = $chap->fetch(PDO::FETCH_ASSOC);
+    $chap->closeCursor();
 		return $result;
 	}
 
-  public function getListIdsCh(array $status)	{ //see, modify
+  public function getListIdsCh(array $status)	{ //ADMIN see, modify
     $sql = 'SELECT ch.id, sch.id, id_chap, status_chap
 				    FROM chapters AS ch, status_chapter AS sch
 				    WHERE sch.status_chap IN (?, ?)
@@ -115,7 +136,7 @@ class Chapters_manager extends Manager
 		return $result;
 	}
 
-  public function lastNum ($status) { //modify, write
+  public function lastNum ($status) { //ADMIN modify, write
 		$sql = 'SELECT ch.id, num_chap
 						FROM chapters ch
 						INNER JOIN status_chapter sch
@@ -125,11 +146,12 @@ class Chapters_manager extends Manager
 						LIMIT 1';
 		$chap = $this->execRequest($sql, array($status));
 		$result = $chap->fetchAll(PDO::FETCH_ASSOC);
+    $chap->closeCursor();
 		return $result;
 	}
 
-  //Create / Update
-  public function updateStatusCh ($status, $chapterId) { //chaptersList
+  //Update ADMIN ONLY
+  public function updateStatusCh ($status, $chapterId) { // chaptersList
 
 		$sql = 'UPDATE status_chapter
 						SET status_chap = ?
@@ -137,7 +159,7 @@ class Chapters_manager extends Manager
 		$stat = $this->execRequest($sql, array($status, $chapterId));
 	}
 
-  public function updateDraft ($number, $title, $content, $chapterId) {  //modify
+  public function updateDraft ($number, $title, $content, $chapterId) {  // modify
 		$sqlChap = 'UPDATE chapters
 								SET num_chap = ?,
 										title_chap = ?,
@@ -157,21 +179,11 @@ class Chapters_manager extends Manager
 		$this->execRequest($sqlChap, array($title, $content, $chapterId));
 	}
 
-
-    public function deleteCh ($chapterId)	{ //trash
-  		$sql = 'DELETE
-  						FROM chapters
-  						WHERE id = ?';
-  		$this->execRequest($sql, array($chapterId));
-  	}
-
-  public function addCh ($number, $title, $content, $status) { //write
-		$sqlChap = 'INSERT INTO chapters(num_chap, title_chap, content_chap, create_date)
-								VALUES (?, ?, ?, NOW())';
-		$this->execRequest($sqlChap, array($number, $title, $content));
-		$chapterId = $this->recoverId();
-		$sqlStat = 'INSERT INTO status_chapter(id_chap, status_chap)
-								VALUES (?, ?)';
-		$this->execRequest($sqlStat, array($chapterId, $status));
-	}
+  // Delete ADMIN ONLY
+  public function deleteCh ($chapterId)	{ //trash
+  	$sql = 'DELETE
+  					FROM chapters
+  					WHERE id = ?';
+  	$this->execRequest($sql, array($chapterId));
+  }
 }
