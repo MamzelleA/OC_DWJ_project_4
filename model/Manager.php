@@ -8,7 +8,8 @@ abstract class Manager {
 	protected function execRequest ($sql, $parameters = null)
 	{
 		if ($parameters == null) {
-			$req = self::getConnexion()->query($sql);
+			$req = self::getConnexion()->prepare($sql);
+			$req->execute();
 		}
 		else {
 			$req = self::getConnexion()->prepare($sql);
