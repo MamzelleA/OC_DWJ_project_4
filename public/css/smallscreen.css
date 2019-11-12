@@ -1,6 +1,9 @@
 @media screen and (max-width: 47.9375em) {
- 	#nav-title {font-size: 1.2em;}
-  .logo {font-size: 0.8em;}
+ 	.nav-title, .cookie-h2, .cookie-h4, .carrousel-h2, #chapter-list, .quote-p, .carrousel-p, .author-word, .title-about, .about-title-img, .about-p {font-size: 0.8em;}
+  #logo-avion {width: 3.5em;}
+  .logo, .cookie-p, .blockquote-footer {font-size: 0.5em;}
+  .fa-bars, .fa-quote-left, .fa-quote-right, .home-h3, .about-h3, .about-ul, .link-footer {font-size: 1em;}
+  .chapter-title-h2 {font-size: 1.2em;}
  	.navbar-toggler
  	{
  		border: none;

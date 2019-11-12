@@ -5,9 +5,9 @@ ob_start();
 	<div class="container-fluid px-0">
 		<nav class="navbar navbar-dark navbar-expand-lg d-flex align-items-center py-0 px-sm-1 px-0">
 			<div class="navbar-header d-flex justify-content-start">
-				<div class="navbar-text ml-3" id="nav-title">
-					<h1 class="py-0 my-0 ml-sm-0 ml-1 text-white" id="nav-title">ESPACE ADMIN</h1>
-					<h2 class="py-0 my-0 ml-sm-0 ml-1 text-white"><span class="logo logo-small">Jean Forteroche</span></h2>
+				<div class="navbar-text ml-3">
+					<h1 class="py-0 my-0 ml-sm-0 ml-1 text-white nav-title">ESPACE ADMIN</h1>
+					<h2 class="py-0 my-0 ml-sm-0 ml-1 text-white logo">Jean Forteroche</h2>
 				</div>
 			</div>
 			<button class="navbar-toggler mx-1 mb-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

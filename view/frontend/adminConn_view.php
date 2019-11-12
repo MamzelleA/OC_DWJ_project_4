@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Connection';
+$this->title = 'Connexion';
 ?>
 	<div class="row">
 		<div class="col-sm-12 py-3 mb-5">
@@ -24,16 +24,16 @@ $this->title = 'Connection';
 			<form id="form-connexion" method="post" action="">
 				<div class="form-group">
 					<div class="col-sm-6 mb-3">
-						<label for="numChap">Identifiant :</label>
-						<input class="form-control text-field" type="text" id="num-chap" name="login"/>
+						<label for="login">Identifiant :</label>
+						<input class="form-control text-field" type="text" id="login" name="login" value="<?php if(isset($_SESSION['login'])) { echo $_SESSION['login'];} ?>"/>
 					</div>
 					<div class="col-sm-6 mb-3">
-						<label for="titleChap">Mot de passe :</label>
-						<input class="form-control text-field" type="password" id="title" name="password"/>
+						<label for="password">Mot de passe :</label>
+						<input class="form-control text-field" type="password" id="password" name="password"/>
 					</div>
 				</div>
 				<div class="col-sm-6">
-					<button name="connexion" type="submit" class="btn btn-outline-primary btn-sm my-3" id="btn-form-conn">CONNECTION</button>
+					<button name="connexion" type="submit" class="btn btn-outline-primary btn-sm my-3" id="btn-form-conn">CONNEXION</button>
 				</div>
 			</form>
 		</div>

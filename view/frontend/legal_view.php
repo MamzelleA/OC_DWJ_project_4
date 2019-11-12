@@ -89,7 +89,7 @@
 						<li>Google Street View – Pan-American Trek – Welcome to Deadhorse, Alaska! par Kevin Dooley (CC BY 2.0)</li>
 					</ul>
 				</li>
-				<li>Page "A propos"
+				<li>Page "L'auteur"
 					<ul>
 						<li>Self-portrait par Mohammed Alsoufi (CC BY 2.0)</li>
 						<li>Untilted par NickiSublime (CC BY 2.0)</li>

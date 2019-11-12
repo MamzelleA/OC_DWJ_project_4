@@ -1,5 +1,4 @@
 <?php
-namespace OC_project_4\view;
 
 class View
 {

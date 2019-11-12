@@ -1,7 +1,7 @@
 /*GENERAL*/
 body {width: 100%; margin: 0;}
 h2 {font-family: 'Quicksand', sans-serif; font-size: 1.5em;}
-h3 {font-family: 'Special Elite', cursive; color: #007bff; font-size: 1.5em}
+h1, h3 {font-family: 'Special Elite', cursive; color: #007bff; font-size: 1.5em}
 h4 {font-family: 'Quicksand', sans-serif;}
 p, a, li, label,textarea, td, th, .alert {font-family: 'QuickSand', sans-serif; font-size: 1em;}
 .text-field {font-family: 'Special Elite', cursive;}
@@ -21,9 +21,9 @@ hr {border: solid 0.1em #007bff;}
 .col {padding: 0;}
 .row{ margin: 0.8em 0 0.5em 0;}
 .no-border-btn {border: none;}
-.fa-times, .fa-paper-plane, .fab-about, .fa-book-reader, .fa-edit, .fa-bookmark, .fa-plus-circle, .fa-exclamation-circle, .fa-question-circle, .fa-unlink {color: #007bff;}
+.fa-times, .fa-paper-plane, .fab-about, .fa-book-reader, .fa-edit, .fa-bookmark, .fa-plus-circle, .fa-exclamation-circle, .fa-question-circle, .fa-frown {color: #007bff;}
 .fas, .far, .fab, .fa {font-size: 1.5em;}
-.fa-unlink {font-size: 5em;}
+.fa-frown {font-size: 8em;}
 .fa-ban {font-size: 0.8em;}
 
 /*SCROLLUP WINDOW*/
@@ -56,7 +56,6 @@ hr {border: solid 0.1em #007bff;}
 .active {font-weight: bold;}
 .logo {font-family: 'Over the Rainbow', cursive;}
 .nav-link:hover {border-top: solid 0.1em #007bff; padding-top: 0.5em;}
-#nav-title {font-family: 'Special Elite', cursive; font-size: 1.5em;}
 #logo-avion {width: 6em; height: auto;}
 .link-footer {font-size: 1.5em;}
 .social {font-size: 2.2em;}
@@ -64,7 +63,7 @@ hr {border: solid 0.1em #007bff;}
 
 /*PAGES*/
 /*about view*/
-.author-word {font-family: 'Over the Rainbow', cursive; font-size: 1.2em}
+.author-word, .title_about, .about-title-img {font-family: 'Over the Rainbow', cursive; font-size: 1.2em}
 
 /*admin view*/
 #reader-white, #edit-white {color: white;}
