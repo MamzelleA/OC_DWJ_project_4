@@ -100,8 +100,8 @@ Class Comments_Manager extends Manager
 				    AND co.id_chap = ch.id
 				    ORDER BY co.id DESC';
 		$com = $this->execRequest($sql);
-    $com->closeCursor();
 		$result = $com->fetchAll(PDO::FETCH_ASSOC);
+    $com->closeCursor();
 		return $result;
   }
 
