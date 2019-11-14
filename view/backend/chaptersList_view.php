@@ -1,16 +1,13 @@
 <?php
 $this->title = 'Chapitres';
-if(isset($_POST['select'])){
-	$select = $_POST['select'];
-}
 ?>
 <div class="row">
 	<div class="col-md-12">
 		<h2 class="text-center">LISTE DES <b>CHAPITRES
 			<?php
-			if (isset($select)) {
-				if ($select == 'published') {echo 'PUBLIES';}
-				elseif($select == 'draft') {echo 'EN BROUILLON';}
+			if (isset($_POST['select'])) {
+				if ($_POST['select'] == 'published') {echo 'PUBLIES';}
+				elseif($_POST['select'] == 'draft') {echo 'EN BROUILLON';}
 			}
 			?>
 			</b>
@@ -28,7 +25,7 @@ if(isset($_POST['select'])){
 <div class="row">
 	<div class="col-md-12 d-flex justify-content-end">
 		<form action="" method="post" class="form-inline">
-			<label for="selection" class="mr-3">Choisir le statut du chapitre :</label>
+			<label for="selection" class="mr-3">Choisir le statut :</label>
 			<select name="select" id="selection">
 				<option selected value="all">Tous</option>
 				<option value="published">Publié</option>
@@ -40,9 +37,13 @@ if(isset($_POST['select'])){
 </div>
 <?php
 if(empty($chapters)) {
-	if ($select == 'published') {$select = 'publié';}
-	elseif ($select == 'draft') {$select = 'brouillon';}
-	echo '<div class="row"><div class="col-sm-12"><p class="text-center">Il n\'y a actuellement aucun chapitre avec un statut '.$select. '.</p></div></div>';
+	if (isset($_POST['select'])) {
+		$select = $_POST['select'];
+		if ($select == 'published') {$select = 'publié';}
+		elseif ($select == 'draft') {$select = 'brouillon';}
+		if ($select == 'publié' || $select == 'brouillon') {echo '<div class="row"><div class="col-sm-12"><p class="text-center">Il n\'y a actuellement aucun chapitre avec un statut '.$select. '.</p></div></div>';}
+		elseif ($select == 'all') {echo '<div class="row"><div class="col-sm-12"><p class="text-center">Il n\'y a actuellement aucun chapitre.';}
+}	else {echo '<div class="row"><div class="col-sm-12"><p class="text-center">Il n\'y a actuellement aucun chapitre.';}
 } else {
 ?>
 <div class="row">

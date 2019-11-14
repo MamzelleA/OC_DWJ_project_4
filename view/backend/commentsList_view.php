@@ -23,7 +23,7 @@ $this->title = 'Commentaires';
 <div class="row">
 	<div class="col-md-12 d-flex justify-content-end">
 		<form action="" method="post" class="form-inline">
-			<label for="selection" class="mr-3">Choisir le statut du commentaire :</label>
+			<label for="selection" class="mr-3">Choisir le statut :</label>
 			<select name="selection" id="selection">
 				<option selected value="all">Tous</option>
 				<option value="published">Publié</option>
@@ -41,8 +41,11 @@ $this->title = 'Commentaires';
 			if ($select == 'published') {$select = 'publié';}
 			elseif ($select == 'reported') {$select = 'signalé';}
 			elseif ($select == 'moderate') {$select = 'modéré';}
-			echo '<div class="row"><div class="col-sm-12"><p class="text-center">Il n\'y a actuellement aucun commentaire avec un statut '.$select. '.</p></div></div>';
+			if ($select == 'publié' || $select == 'signalé' || $select == 'modéré') {
+				echo '<div class="row"><div class="col-sm-12"><p class="text-center">Il n\'y a actuellement aucun commentaire avec un statut '.$select. '.</p></div></div>';
+			} elseif ($select == 'all') {echo '<div class="row"><div class="col-sm-12"><p class="text-center">Il n\'y a actuellement aucun commentaire.</p></div></div>';}
 		} else {echo '<div class="row"><div class="col-sm-12"><p class="text-center">Il n\'y a actuellement aucun commentaire.</p></div></div>';}
+
 	} else {
 ?>
 		<table class="table table-responsive-lg table-hover">
