@@ -44,7 +44,7 @@ $this->subtitle = 'Suivez ici la création de son nouveau roman';
 			</ol>
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img class="d-block w-100" src="public/images/body2.jpg" alt="...">
+					<img class="d-block w-100" src="public/images/body2.jpg" alt="The Aurora over #chenasprings par Kodachron">
 					<div class="carousel-caption d-block">
 						<a href="index.php?action=chapter&num=<?= $lastCh[0]['num_chap'] ?>" title ="lire le chapitre">
 							<h2 class="carrousel-h2">CHAPITRE <?= '<b>' .$lastCh[0]['num_chap'].'</b> | ' .$lastCh[0]['title_chap']; ?></h2>
@@ -53,7 +53,7 @@ $this->subtitle = 'Suivez ici la création de son nouveau roman';
 					</div>
 				</div>
 				<div class="carousel-item">
-					<img class="d-block w-100" src="public/images/body3.jpg" alt="...">
+					<img class="d-block w-100" src="public/images/body3.jpg" alt="Aurora par Paul Stewart">
 					<div class="carousel-caption d-block">
 						<a href="index.php?action=chapter&num=<?= $lastCh[1]['num_chap'] ?>" title ="lire le chapitre">
 							<h2 class="carrousel-h2">CHAPITRE <?= '<b>' .$lastCh[1]['num_chap'].'</b> | ' .$lastCh[1]['title_chap']; ?></h2>
@@ -62,7 +62,7 @@ $this->subtitle = 'Suivez ici la création de son nouveau roman';
 					</div>
 				</div>
 				<div class="carousel-item">
-					<img class="d-block w-100" src="public/images/body4.jpg" alt="...">
+					<img class="d-block w-100" src="public/images/body4.jpg" alt="Aurora borealis par Thomas Hubauer">
 					<div class="carousel-caption d-block">
 						<a href="index.php?action=chapter&num=<?= $lastCh[2]['num_chap'] ?>" title ="lire le chapitre">
 							<h2 class="carrousel-h2">CHAPITRE <?= '<b>' .$lastCh[2]['num_chap'].'</b> | ' .$lastCh[2]['title_chap']; ?></h2>
@@ -119,7 +119,7 @@ $this->subtitle = 'Suivez ici la création de son nouveau roman';
 					<a class="btn btn-outline-primary btn-sm btn-block btn-more" href="<?='index.php?action=about'?>" role="button">EN SAVOIR PLUS</a>
 				</div>
 				<div class="card-img">
-					<img class="img-fluid" src="public/images/body7.jpg">
+					<img class="img-fluid" src="public/images/body7.jpg" alt="Google Street View – Pan-American Trek par Kevin Dooley">
 				</div>
 			</div>
 			<div class="card card-summary mb-0" id="novel-card">
@@ -131,7 +131,7 @@ $this->subtitle = 'Suivez ici la création de son nouveau roman';
 					<a class="btn btn-outline-primary btn-sm btn-block btn-more" href="<?='index.php?action=about'?>" role="button">EN SAVOIR PLUS</a>
 				</div>
 				<div class="card-img">
-					<img class="img-fluid" src="public/images/body8.jpg">
+					<img class="img-fluid" src="public/images/body8.jpg" alt="Google Street View – Pan-American Trek par Kevin Dooley">
 				</div>
 			</div>
 			<div class="card card-summary mb-0" id="chapters-card">
@@ -147,7 +147,7 @@ $this->subtitle = 'Suivez ici la création de son nouveau roman';
 					</div>
 				</div>
 				<div class="card-img">
-					<img class="img-fluid" src="public/images/body9.jpg">
+					<img class="img-fluid" src="public/images/body9.jpg" alt="Google Street View – Pan-American Trek par Kevin Dooley">
 				</div>
 			</div>
 		</div>

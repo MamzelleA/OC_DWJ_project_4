@@ -73,7 +73,7 @@ ob_start();
 	</div>
 </footer>
 <script src="public/js/cookiechoices.js"></script>
-<script>document.addEventListener('DOMContentLoaded', function(event){cookieChoices.showCookieConsentBar('Ce site utilise des cookies pour vous offrir une meilleure expérience. En poursuivant votre navigation, vous acceptez l’utilisation des cookies.', 'J’ai compris', 'En savoir plus', 'http://localhost/OC_DWJ_project_4/index.php?action=legal#cookie');});</script>
+<script>document.addEventListener('DOMContentLoaded', function(event){cookieChoices.showCookieConsentBar('Ce site utilise des cookies pour vous offrir une meilleure expérience. En poursuivant votre navigation, vous acceptez l’utilisation des cookies.', 'J’ai compris', 'En savoir plus', 'https://projet4.mamzellea.fr/index.php?action=legal#cookie');});</script>
 <?php
 $template = ob_get_clean();
 require('template.php');

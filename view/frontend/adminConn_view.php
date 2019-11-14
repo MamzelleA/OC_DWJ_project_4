@@ -6,7 +6,8 @@ $this->title = 'Connexion';
 			<h2 class="text-center">ACCES A LA PARTIE <b>ADMINISTRATION</b></h2>
 		</div>
 		<div class="col-md-9 offset-md-3 py-1 mb-1">
-			<p>Pour accèder à cette partie, vous devez être administrateur du site. Merci de vous authentifier.</p>
+			<p>Pour accèder à cette partie, vous devez être administrateur du site. Merci de vous authentifier.<br>
+			Tous les champs doivent être renseignés.</p>
 		</div>
 		<?php
 		if (isset($confirm)) {
@@ -25,11 +26,11 @@ $this->title = 'Connexion';
 				<div class="form-group">
 					<div class="col-sm-6 mb-3">
 						<label for="login">Identifiant :</label>
-						<input class="form-control text-field" type="text" id="login" name="login" value="<?php if(isset($_SESSION['login'])) { echo $_SESSION['login'];} ?>"/>
+						<input class="form-control text-field" type="text" id="login" name="login" required value="<?php if(isset($_SESSION['login'])) { echo $_SESSION['login'];} ?>"/>
 					</div>
 					<div class="col-sm-6 mb-3">
 						<label for="password">Mot de passe :</label>
-						<input class="form-control text-field" type="password" id="password" name="password"/>
+						<input class="form-control text-field" type="password" id="password" name="password" required/>
 					</div>
 				</div>
 				<div class="col-sm-6">

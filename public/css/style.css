@@ -25,6 +25,7 @@ hr {border: solid 0.1em #007bff;}
 .fas, .far, .fab, .fa {font-size: 1.5em;}
 .fa-frown {font-size: 8em;}
 .fa-ban {font-size: 0.8em;}
+.fa-book-reader:hover, .fa-edit:hover, .fa-times:hover {color: white;}
 
 /*SCROLLUP WINDOW*/
 .scrollup {
