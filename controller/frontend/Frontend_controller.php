@@ -73,24 +73,18 @@ class Frontend_controller extends Controller
 
 	public function adminConn () {
 		$confirm = NULL;
-		$login = NULL;
-		$password = NULL;
 		if(!empty($_POST)){
 			if(isset($_POST['connexion'])){
-				if(empty($_POST['login']) || empty($_POST['password'])){
-					$confirm = 'Tous les champs doivent être renseignés';
-				} else {
-					$log = $this->admin->getLog($_POST['login'], $_POST['password']);
-					if(!empty($log)) {
-						$_SESSION['login'] = $log[0]['login'];
-						$_SESSION['password'] = $log[0]['password'];
-						header('Location: index.php?action=admin');
-						exit;
-					} else {$confirm = 'L\'identifiant et/ou le mot de passe renseigné est invalide.';}
-				}
+				$log = $this->admin->getLog($_POST['login'], $_POST['password']);
+				if(!empty($log)) {
+					$_SESSION['login'] = $log[0]['login'];
+					$_SESSION['password'] = $log[0]['password'];
+					header('Location: index.php?action=admin');
+					exit();
+				} else {$confirm = 'L\'identifiant et/ou le mot de passe renseigné est invalide.';}
 			}
 		}
-		$view = $this->view->genView(array('login' => $login, 'password' => $password, 'confirm' => $confirm));
+		$view = $this->view->genView(array('confirm' => $confirm));
 		return $view;
 	}
 

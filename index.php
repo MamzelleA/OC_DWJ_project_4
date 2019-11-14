@@ -1,7 +1,9 @@
 <?php
+session_start();
 require ('Routeur.php');
 
-	if (isset($_GET['action'])){
+	if (!empty($_GET['action'])){
+		$action = $_GET['action'];
 		$routeur = new Routeur($_GET['action']);
 		$routeur->driveRequest();
 	} else {

@@ -179,7 +179,7 @@ class Backend_controller extends Controller
 				} elseif(isset($_POST['draft'])) {
 					$numChaps = $this->listNumsNoTrashCh(); //to control if POSTnum exist in db
 					if(in_array($_POST['num'], $numChaps)) {
-						$confirm = 'Le chapitre a bien été enregistré en brouillon.<br>ATTENTION ! Le numéro de chapitre <span class="font-bold">' .$_POST['numChap']. '</span> existe déjà.';
+						$confirm = 'Le chapitre a bien été enregistré en brouillon.<br>ATTENTION ! Le numéro de chapitre <span class="font-bold">( ' .$_POST['numChap']. ' )</span> existe déjà.';
 					} else {
 						$confirm = 'Le chapitre a bien été enregistré en brouillon.';
 					}
@@ -189,7 +189,7 @@ class Backend_controller extends Controller
 					$confirm = 'Le chapitre a bien été placé dans la corbeille.';
 				}
 				$view = $this->view->genView(array('chapter' => $chapter, 'lastNum' => $lastNum, 'confirm' => $confirm, 'trouble' => $trouble));
-				Session::unset(array('num', 'title', 'content'));
+				unset($_SESSION['num'], $_SESSION['title'], $_SESSION['content']);
 				return $view;
 			} else {throw new Exception('Le chapitre demandé n\'existe pas.');}
 		} else {
@@ -199,18 +199,18 @@ class Backend_controller extends Controller
 	}
 
 	public function write () {
-		if (null !== Session::getSession('login') && null !== Session::getSession('password')) {
-			$lastNum = NULL;
-		  $confirm = NULL;
-		  $trouble = NULL;
-			if (isset($_POST['num']) && $_POST['num'] != ''){$_SESSION['num'] = $_POST['num'];}
-		  if (isset($_POST['title']) && $_POST['title'] != ''){$_SESSION['title'] = $_POST['title'];}
-		  if (isset($_POST['content']) && $_POST['content'] != ''){$_SESSION['content'] = $_POST['content'];}
-			if (isset($_POST['published'])) {
-		    if (!empty($_POST['num'] && !empty($_POST['title']) && !empty($_POST['content']))){
-		      $lastNum = $this->chapters->lastNum('published'); //return num (str) of the last published chapter in a bi-dimension array, control if POSTnum is consistent
-		      $next = intval($lastNum[0]['num_chap']) + 1;
-		      if ($_POST['num'] == $next) {
+		if(isset($_SESSION['login']) && isset($_SESSION['password'])) {
+        $lastNum = NULL;
+		    $confirm = NULL;
+		    $trouble = NULL;
+			if(isset($_POST['num']) && $_POST['num'] != ''){$_SESSION['num'] = $_POST['num'];}
+		      if(isset($_POST['title']) && $_POST['title'] != ''){$_SESSION['title'] = $_POST['title'];}
+		      if(isset($_POST['content']) && $_POST['content'] != ''){$_SESSION['content'] = $_POST['content'];}
+			  if(isset($_POST['published'])) {
+		          if(!empty($_POST['num'] && !empty($_POST['title']) && !empty($_POST['content']))){
+                      $lastNum = $this->chapters->lastNum('published'); //return num (str) of the last published chapter in a bi-dimension array, control if POSTnum is consistent
+		              $next = intval($lastNum[0]['num_chap']) + 1;
+		          if($_POST['num'] == $next) {
 		        $this->chapters->addCh ($_POST['num'], $_POST['title'], $_POST['content'], 'published');
 		        $confirm = 'Votre chapitre a bien été publié';
 		      } else {
@@ -219,7 +219,7 @@ class Backend_controller extends Controller
 		    } else {
 		      $trouble = 'Tous les champs doivent être renseignés.';
 		    }
-		  } elseif (isset($_POST['draft'])) {
+		  } elseif(isset($_POST['draft'])) {
 		    $numChaps = $this->listNumsNoTrashCh(array('published', 'draft')); //return bi-dimension array with all the chap numbers not trashed
 		    if(in_array($_POST['num'], $numChaps)) {
 		      $confirm = 'Le chapitre a bien été enregistré en brouillon.<br>ATTENTION ! Le numéro de chapitre <span class="font-bold">' .$_POST['num']. '</span> existe déjà.';
@@ -229,6 +229,7 @@ class Backend_controller extends Controller
 		    $this->chapters->addCh ($_POST['num'], $_POST['title'], $_POST['content'], 'draft');
 		  }
 			$view = $this->view->genView(array('lastNum' => $lastNum, 'confirm' => $confirm, 'trouble' => $trouble));
+			unset($_SESSION['num'], $_SESSION['title'], $_SESSION['content']);
 		  return $view;
 		} else {
 	  	header('Location: index.php?action=adminConn');
