@@ -45,8 +45,8 @@ if (isset($chapter['num_chap'])) {
 					echo '<input class="btn btn-outline-primary btn-sm m-1" name="trash" type="submit" value="SUPPRIMER"/>';
 				}
 				?>
-				<button class="btn btn-outline-primary btn-sm m-3 btn-back"><a href="<?= 'index.php?action=chaptersList' ?>" onclick="return confirm('ATTENTION ! Si vous continuez, vous perdrez toutes vos modifications.');">RETOUR A LA LISTE</a></</button>
-				<button class="btn btn-outline-primary btn-sm m-1 btn-back"><a href= "<?= 'index.php?action=admin' ?>" onclick="return confirm('ATTENTION ! Si vous continuez, vous perdrez toutes vos modifications.');">RETOUR A L'ACCUEIL</a></</button>
+				<button class="btn btn-outline-primary btn-sm mt-1 mr-1 ml-0 m-md-3 btn-back"><a href="<?= 'index.php?action=chaptersList' ?>" onclick="return confirm('ATTENTION ! Si vous continuez, vous perdrez toutes vos modifications.');">RETOUR A LA LISTE</a></</button>
+				<button class="btn btn-outline-primary btn-sm mt-1 mr-1 ml-0 m-md-3 btn-back"><a href= "<?= 'index.php?action=admin' ?>" onclick="return confirm('ATTENTION ! Si vous continuez, vous perdrez toutes vos modifications.');">RETOUR A L'ACCUEIL</a></</button>
 			</div>
 			</div>
 		</form>

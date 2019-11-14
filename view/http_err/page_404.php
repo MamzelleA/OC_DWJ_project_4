@@ -26,49 +26,37 @@
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 	</head>
 	<body>
-  <header>
-    <div class="container-fluid px-0">
-      <nav class="navbar navbar-dark navbar-expand-lg d-flex align-items-center py-0 px-sm-1 px-0">
-        <div class="navbar-header d-flex justify-content-start">
-          <div class="navbar-brand mr-sm-0 ">
-            <a href="<?='index.php?action=home'?>">
-                <img class="img-fluid" id="logo-avion" src="public/images/logo_brand.png" alt="logo avion papier">
-              </a>
-            </div>
-          <div class="navbar-text">
-            <h1 class="py-0 my-0 ml-sm-0 ml-1 text-white" id="nav-title">BILLET SIMPLE POUR L'ALASKA</h1>
-            <h2 class="py-0 my-0 ml-sm-0 ml-1 text-white"><span class="logo logo-small">Jean Forteroche</span></h2>
-          </div>
-        </div>
-        <button class="navbar-toggler mx-1 mb-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fas fa-bars mr-1"></i>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end pb-3" id="navbarSupportedContent">
-          <div class="navbar-nav">
-            <a <?php if($title == 'Jean Forteroche') {echo('class="active text-primary nav-item nav-link text-center"');} ?> class="nav-item nav-link text-white text-center" href="<?='index.php?action=home'?>">Accueil</a>
-            <a <?php if($title == 'L\'auteur') {echo('class="active text-primary nav-item nav-link text-center"');} ?> class="nav-item nav-link text-white text-center" href="<?='index.php?action=about'?>">L'auteur</a>
-            <a <?php if($title == 'Les chapitres') {echo('class="active text-primary nav-item nav-link text-center"');} ?> class="nav-item nav-link text-white text-center" href="index.php?action=chapters">Les chapitres</a>
-          </div>
-        </div>
-      </nav>
-    </div>
-  </header>
+		<header>
+			<div class="container-fluid px-0">
+				<nav class="navbar navbar-dark navbar-expand-lg d-flex align-items-center py-0 px-sm-1 px-0">
+					<div class="navbar-header d-flex justify-content-start px-0 col-9 col-md-auto">
+						<div class="navbar-brand mx-1">
+							<a href="<?='index.php?action=home'?>">
+				    		<img class="img-fluid" id="logo-avion" src="public/images/logo_brand.png" alt="logo avion papier">
+				  		</a>
+			  		</div>
+						<div class="navbar-text mx-1">
+							<h1 class="py-0 my-0 ml-sm-0 ml-1 text-white nav-title">BILLET SIMPLE POUR L'ALASKA</h1>
+							<h2 class="py-0 my-0 ml-sm-0 ml-1 text-white logo">Jean Forteroche</h2>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</header>
   <section>
-    <div class="container-fluid px-0">
-    <div class="row m-5 error_view">
-      <div class="col-lg-1"><i class="fas fa-unlink"></i></div>
-      <div class="col-lg-11 col-md-11 col-sm-11">
-        <div class="text-justify">
-          <h3 class="title">Oups ! il semble qu'il y ait une erreur</h3>
+		<div class="row m-5 error_view">
+			<div class="col-md-2 mb-3 mb-lg-0 text-center"><i class="far fa-frown"></i></div>
+			<div class="col-md-10">
+				<div class="text-justify">
+					<h3 class="title">Oups ! il semble qu'il y ait une erreur</h3>
           <p><b>Message :</b> La page demandée n'existe pas.</p>
           <p><b>Code :</b> 404 </p>
-          <form>
-            <input type = "button" class="btn btn-outline-primary btn-sm" value = "RETOUR PAGE PRECEDENTE"  onclick = "history.back()">
-          </form>
-        </div>
-      </div>
-    </div>
-    </div>
+					<form>
+						<input type = "button" class="btn btn-outline-primary btn-sm" value = "RETOUR PAGE PRECEDENTE"  onclick = "history.back()">
+					</form>
+				</div>
+			</div>
+		</div>
   </section>
   <!--FOOTER-->
   <footer class="page-footer container-fluid text-white px-1">

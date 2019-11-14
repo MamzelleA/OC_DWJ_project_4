@@ -3,12 +3,12 @@ $this->title = $chapter['title_chap'];
 ?>
 <div class="row">
 	<div class="col-md-12">
-		<h2 class="text-left ml-5 mb-0">Chapitre <span class="badge badge-pill badge-primary" id="bg-num-chap"><?= $chapter['num_chap'] ?></span> | <?= $chapter['title_chap'] ?></h2>
+		<h2 class="text-left ml-md-5 mb-0 chapter-title-h2">Chapitre <span class="badge badge-pill badge-primary" id="bg-num-chap"><?= $chapter['num_chap'] ?></span> | <?= $chapter['title_chap'] ?></h2>
 		<?php
 		if (NULL !== $chapter['modify_date_fr']) {
-			echo '<p class="small-p ml-5 mt-0">écrit le ' .$chapter['create_date_fr']. ', modifié le ' .$chapter['modify_date_fr']. '</p>';
+			echo '<p class="small-p ml-md-5 mt-0">écrit le ' .$chapter['create_date_fr']. ', modifié le ' .$chapter['modify_date_fr']. '</p>';
 		} else {
-			echo '<p class="small-p ml-5 mt-0"><i>écrit le ' .$chapter['create_date_fr']. '</i></p>';
+			echo '<p class="small-p ml-md-5 mt-0"><i>écrit le ' .$chapter['create_date_fr']. '</i></p>';
 		}
 		?>
 	</div>

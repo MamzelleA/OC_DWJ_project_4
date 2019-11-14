@@ -35,8 +35,8 @@ $this->title = 'Rédiger';
 					<div class="col-sm-12">
 						<input class="btn btn-outline-primary btn-sm mr-3" name="published" type="submit" onclick="return confirm('ATTENTION ! Une fois le chapitre publié vous ne pourrez plus le supprimer.');" value="PUBLIER" />
 						<input class="btn btn-outline-primary btn-sm mr-3" name="draft" type="submit" value="BROUILLON"/>
-						<button class="btn btn-outline-primary btn-sm mr-3 btn-back"><a href="<?= 'index.php?action=chaptersList' ?>" onclick="return confirm('ATTENTION ! Si vous continuez, vous perdrez toutes vos modifications.');">RETOUR A LA LISTE</a></</button>
-						<button class="btn btn-outline-primary btn-sm btn-back"><a href= "<?= 'index.php?action=admin' ?>" onclick="return confirm('ATTENTION ! Si vous continuez, vous perdrez toutes vos modifications.');">RETOUR A L'ACCUEIL</a></</button>
+						<button class="btn btn-outline-primary btn-sm mt-1 mr-1 ml-0 m-md-3 btn-back"><a href="<?= 'index.php?action=chaptersList' ?>" onclick="return confirm('ATTENTION ! Si vous continuez, vous perdrez toutes vos modifications.');">RETOUR A LA LISTE</a></</button>
+				    <button class="btn btn-outline-primary btn-sm mt-1 mr-1 ml-0 m-md-3 btn-back"><a href= "<?= 'index.php?action=admin' ?>" onclick="return confirm('ATTENTION ! Si vous continuez, vous perdrez toutes vos modifications.');">RETOUR A L'ACCUEIL</a></</button>
 					</div>
 			</form>
 		<?php
